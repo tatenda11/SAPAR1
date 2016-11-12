@@ -17,8 +17,7 @@ namespace SAPSR1
         public string relationship;
         public string mobileNumber;
         public string email;
-        public Boolean dacCrud;
-        public Boolean dacFound;
+    
 
         public Boolean setStudentDetails(string add, string guardianFname, string guardianSname, string rel, string cell, string email)
         {
@@ -55,7 +54,7 @@ namespace SAPSR1
             {
                 checkConnection();
                 query.Connection = connection;
-                query.CommandText = "SELECT * FROM wizbalances WHERE accountId= '" + acc + "',periodId = '" + period + "' ";
+                query.CommandText = "SELECT * FROM studentdetails WHERE enrolmentId = '" + enId + "' ";
                 MySqlDataReader dataReader = query.ExecuteReader();
                 while (dataReader.Read())
                 {

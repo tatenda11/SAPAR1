@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SAPSR1.databaseUtilies" Collapsed="true">
+    <Position X="8.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAIAQAABAEAAAAAAAAAAAAAIAEAAAAA=</HashCode>
+      <FileName>databaseUtilies.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.frmLogin" Collapsed="true">
+    <Position X="19.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAQACAAABEAAACAAEACIAAACAAAACAAAABAAAA=</HashCode>
+      <FileName>frmLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.frmMainMenu" Collapsed="true">
+    <Position X="21" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>frmMainMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageAttendence">
+    <Position X="14.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAIABAAhAAAgAESAAAAAAAEBAQAAAAAAA=</HashCode>
+      <FileName>manageAttendence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageBalance">
+    <Position X="1" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAiAAQAAAARAAAAEAAABAAAAAAAAAQAAAg=</HashCode>
+      <FileName>manageBalance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageClassrooms">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAIAAAAAAAAAAAAIIgAAAACgAACAAAAEQBAAAAAA=</HashCode>
+      <FileName>manageClassrooms.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageStudent">
+    <Position X="10" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAJAAAAAAAEBAAEAAAAAAAABAQCAQAAAA=</HashCode>
+      <FileName>manageStudent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.managestudentdetails">
+    <Position X="16.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAQAAAAAwAQAAGAAAAIIAAAEAABAQAAAAQAA=</HashCode>
+      <FileName>managestudentdetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageTransaction">
+    <Position X="3.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>manageTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageUserDetails">
+    <Position X="7.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQBAAAAACAAAAAAAAEAAAEAAABAQCAAAQBQ=</HashCode>
+      <FileName>manageUserDetails.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.manageUsers">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAgCAAAAAAAAAAAAAAAABgQAxEAEQA=</HashCode>
+      <FileName>manageUsers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.Program" Collapsed="true">
+    <Position X="22.75" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.Properties.Resources" Collapsed="true">
+    <Position X="19.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SAPSR1.Properties.Settings" Collapsed="true">
+    <Position X="21" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
