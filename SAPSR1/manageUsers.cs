@@ -47,6 +47,7 @@ namespace SAPSR1
                 query.Connection = connection;
                 query.CommandText = sql;
                 int i = query.ExecuteNonQuery();
+                this.userId = Convert.ToInt32(query.LastInsertedId);
                 this.dacCrud = (i > 0) ? true : false;
                 return this.dacCrud;
             }
@@ -69,9 +70,13 @@ namespace SAPSR1
                 string sql = "SELECT userId FROM wizuser WHERE userName = '" + uName + "'";
                 query.Connection = connection;
                 query.CommandText = sql;
-                int i = query.ExecuteNonQuery();
-                System.Windows.Forms.MessageBox.Show(i.ToString());
-                this.dacFound = (i > 0) ? true : false;
+                MySqlDataReader myReader = query.ExecuteReader();
+                int count = 0;
+                while (myReader.Read())
+                {
+                    count = count + 1;
+                }
+                this.dacFound = (count > 0) ? true : false;
                 return this.dacFound;
             }
             catch (Exception e)

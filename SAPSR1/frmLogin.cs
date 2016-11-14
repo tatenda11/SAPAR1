@@ -15,6 +15,7 @@ namespace SAPSR1
         public frmLogin()
         {
             InitializeComponent();
+ 
         }
 
         private void frmLogin_Load(object sender, EventArgs e)

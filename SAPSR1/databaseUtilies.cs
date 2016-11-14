@@ -16,7 +16,7 @@ namespace SAPSR1
         //protected static MySqlDataAdapter da;
         protected static string sql;
 
-        protected static string GetConnectionStrings()
+        public static string GetConnectionStrings()
         {
 
             return ConfigurationManager.ConnectionStrings["DatastoreDataContextConnectionString"].ConnectionString;
@@ -62,6 +62,7 @@ namespace SAPSR1
         {
             try
             {
+                checkConnection();
                 query.Connection = connection;
                 query.CommandText = sql;
                 MySqlDataReader myReader = query.ExecuteReader();
