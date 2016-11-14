@@ -31,9 +31,6 @@ namespace SAPSR1
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.btnAdd = new MetroFramework.Controls.MetroButton();
@@ -46,9 +43,9 @@ namespace SAPSR1
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.txtClassName = new MetroFramework.Controls.MetroTextBox();
             this.btnClose = new MetroFramework.Controls.MetroButton();
-            this.dgvClasses = new MetroFramework.Controls.MetroGrid();
+            this.dgvClassInfo = new System.Windows.Forms.DataGridView();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClasses)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClassInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -144,14 +141,14 @@ namespace SAPSR1
             this.cmbClassGrade.FormattingEnabled = true;
             this.cmbClassGrade.ItemHeight = 23;
             this.cmbClassGrade.Items.AddRange(new object[] {
-            "grade 0",
-            "grade 1",
-            "grade 2",
-            "grade 3",
-            "grade 4",
-            "grade 5",
-            "grade 6",
-            "grade 7"});
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7"});
             this.cmbClassGrade.Location = new System.Drawing.Point(94, 74);
             this.cmbClassGrade.Name = "cmbClassGrade";
             this.cmbClassGrade.Size = new System.Drawing.Size(187, 29);
@@ -225,72 +222,41 @@ namespace SAPSR1
             this.btnClose.Text = "Close";
             this.btnClose.UseSelectable = true;
             // 
-            // dgvClasses
+            // dgvClassInfo
             // 
-            this.dgvClasses.AllowUserToResizeRows = false;
-            this.dgvClasses.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.dgvClasses.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvClasses.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.dgvClasses.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClasses.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvClasses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvClasses.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvClasses.EnableHeadersVisualStyles = false;
-            this.dgvClasses.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.dgvClasses.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            this.dgvClasses.Location = new System.Drawing.Point(32, 284);
-            this.dgvClasses.Name = "dgvClasses";
-            this.dgvClasses.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvClasses.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dgvClasses.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.dgvClasses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvClasses.Size = new System.Drawing.Size(802, 150);
-            this.dgvClasses.TabIndex = 10;
-            this.dgvClasses.Theme = MetroFramework.MetroThemeStyle.Dark;
-            this.dgvClasses.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClasses_CellContentClick);
+            this.dgvClassInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClassInfo.Location = new System.Drawing.Point(32, 280);
+            this.dgvClassInfo.Name = "dgvClassInfo";
+            this.dgvClassInfo.Size = new System.Drawing.Size(802, 171);
+            this.dgvClassInfo.TabIndex = 10;
+            this.dgvClassInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClassInfo_CellContentClick);
+            this.dgvClassInfo.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClassInfo_CellContentClick);
+            this.dgvClassInfo.SelectionChanged += new System.EventHandler(this.dgvClassInfo_SelectionChanged);
             // 
             // frmAddClass
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 539);
-            this.Controls.Add(this.dgvClasses);
+            this.Controls.Add(this.dgvClassInfo);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmAddClass";
             this.Text = "Add class";
             this.Load += new System.EventHandler(this.frmAddClass_Load);
+            this.Shown += new System.EventHandler(this.frmAddClass_Shown);
+            this.Click += new System.EventHandler(this.frmAddClass_Click);
+            this.MouseHover += new System.EventHandler(this.frmAddClass_MouseHover);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvClasses)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClassInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         private void dgvClasses_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         #endregion
@@ -307,6 +273,6 @@ namespace SAPSR1
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroTextBox txtClassName;
         private MetroFramework.Controls.MetroButton btnClose;
-        private MetroFramework.Controls.MetroGrid dgvClasses;
+        private DataGridView dgvClassInfo;
     }
 }

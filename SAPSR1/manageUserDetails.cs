@@ -45,6 +45,7 @@ namespace SAPSR1
         {
             try
             {
+                checkConnection();
                 string sql = "SELECT * FROM wizuserdetails WHERE userId =" + userId.ToString();
                 query.Connection = connection;
                 query.CommandText = sql;

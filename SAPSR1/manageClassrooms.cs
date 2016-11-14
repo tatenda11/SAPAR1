@@ -62,6 +62,7 @@ namespace SAPSR1
                     this.classGrade = Convert.ToInt32(dataReader["classGrade"]);
                     this.teacherId = Convert.ToInt32(dataReader["teacherId"]);
                     this.classDetails = dataReader["classDetails"].ToString();
+                    this.className = dataReader["className"].ToString();
                 }
             }
             catch (Exception ex)
