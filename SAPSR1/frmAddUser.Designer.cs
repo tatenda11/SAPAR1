@@ -258,7 +258,7 @@
             this.metroTabPage2.Name = "metroTabPage2";
             this.metroTabPage2.Size = new System.Drawing.Size(435, 371);
             this.metroTabPage2.TabIndex = 1;
-            this.metroTabPage2.Text = "metroTabPage2";
+            this.metroTabPage2.Text = "user information";
             this.metroTabPage2.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTabPage2.VerticalScrollbarBarColor = true;
             this.metroTabPage2.VerticalScrollbarHighlightOnWheel = false;

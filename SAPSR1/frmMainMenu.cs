@@ -20,13 +20,20 @@ namespace SAPSR1
 
         private void frmMainMenu_Load(object sender, EventArgs e)
         {
-
+            sessions.userId = 15;
+            sessions.userType = "T";
+            manageControl myCnrl = new manageControl();
+            myCnrl.getCntrl();
+            sessions.curPeriod = myCnrl.currentPeriod;
+            sessions.currTerm = myCnrl.currTerm;
         }
 
         private void metroButton1_Click(object sender, EventArgs e)
         {
-            frmAddUser addUser = new frmAddUser();
-            addUser.ShowDialog();
+            //frmAddUser addUser = new frmAddUser();
+            //addUser.ShowDialog();
+            frmAttendance att = new frmAttendance();
+            att.ShowDialog();
             //msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
             /*var m = new Random();
             int next = m.Next(0, 13);

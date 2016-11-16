@@ -46,5 +46,35 @@ namespace SAPSR1
                 return false;
             }
         }
+
+        public void getStudentByQuery(string sql)
+        {
+            try
+            {
+                checkConnection();
+                query.Connection = connection;
+                query.CommandText = sql;
+                MySqlDataReader dataReader = query.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    this.enrolmentId = dataReader["enrolmentId"].ToString();
+                    this.firstName = dataReader["firstName"].ToString();
+                    this.lastName = dataReader["lastName"].ToString();
+                    this.middleName = dataReader["middleName"].ToString();
+                    this.systemId = Convert.ToInt32(dataReader["systemId"]);
+                    this.classId = Convert.ToInt32(dataReader["classId"]);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in getStudentByQuery()  " + ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
     }
 }

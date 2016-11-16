@@ -19,6 +19,11 @@ namespace SAPSR1
         public Boolean dacCrud;
         /*************************************/
 
+
+        public manageClassrooms()
+        {
+            connection.Close();
+        }
         public Boolean setClass(string cName, string cGrade, int teacher, string details)
         {
             try
@@ -51,8 +56,8 @@ namespace SAPSR1
         {
             try
             {
-                string sql = "SELECT * FROM wizclassrooms WHERE classRoomId =" + classId.ToString();
                 checkConnection();
+                string sql = "SELECT * FROM wizclassrooms WHERE classRoomId =" + classId.ToString();
                 query.Connection = connection;
                 query.CommandText = sql;
                 MySqlDataReader dataReader = query.ExecuteReader();
@@ -88,6 +93,56 @@ namespace SAPSR1
                 return false;
             }
         }
+        public void getClassByTeacher(int teacheId)
+        {
+            try
+            {
+                string sql = "SELECT * FROM wizclassrooms WHERE teacherId =" + teacheId;
+                checkConnection();
+                query.Connection = connection;
+                query.CommandText = sql;
+                MySqlDataReader dataReader = query.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    this.classRoomId = Convert.ToInt32(dataReader["classRoomId"]);
+                    this.classGrade = Convert.ToInt32(dataReader["classGrade"]);
+                    this.teacherId = Convert.ToInt32(dataReader["teacherId"]);
+                    this.classDetails = dataReader["classDetails"].ToString();
+                    this.className = dataReader["className"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in getClass()  " + ex);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public int countStudents(int classId)
+        {
+            try
+            {
+                string sql = "SELECT COUNT(*) FROM wizclassrooms WHERE classRoomId = " + classId;
+                checkConnection();
+                query.Connection = connection;
+                query.CommandText = sql;
+                return Convert.ToInt32(query.ExecuteScalar());
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in getClass()  " + ex);
+                return 0;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        } 
+
 
     }
 }
