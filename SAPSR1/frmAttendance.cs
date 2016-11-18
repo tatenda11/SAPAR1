@@ -32,9 +32,9 @@ namespace SAPSR1
                 if (sessions.userType == "T")
                 {
                     manageClassrooms myC = new manageClassrooms();
+                    manageStudent myS = new manageStudent();
                     myC.getClassByTeacher(sessions.userId);
                     this.classId = myC.classRoomId;
-                    //this.classTotal = myC.countStudents(this.classId);
                     this.classTotal = 3;
                     this.lbCounter.Text = page.ToString() + "/" + classTotal.ToString();
                     this.fillStudents();
@@ -136,11 +136,9 @@ namespace SAPSR1
                     manageStudent myS = new manageStudent();
                     string sql = "SELECT * FROM wizstudents WHERE classId = " + this.classId + " ORDER BY systemId ASC LIMIT 1 OFFSET " + this.page;
                     myS.getStudentByQuery(sql);
-                    //SELECT * FROM fi_posts WHERE wall = ? AND agent = ? ORDER BY postId DESC LIMIT $page ,$per_pa
                     this.txtEnId.Text = myS.enrolmentId;
                     this.txtFname.Text = myS.firstName;
                     this.txtLname.Text = myS.lastName;
-                    //get Attendance information
                     manageAttendence myA = new manageAttendence();
                     myA.getAttendence(sessions.currTerm, myS.enrolmentId);
                     this.txtAbsent.Text = myA.absentdays.ToString();
@@ -166,7 +164,50 @@ namespace SAPSR1
 
         private void btnPresent_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                var student = this.txtEnId.Text;
+                var attendDate = this.txtDate.Value.ToShortDateString();
+                manageAttendence myA = new manageAttendence();
+                manageattendsheet myAs = new manageattendsheet();
+                myAs.checkEntered(student, attendDate);
+                if (myAs.dacFound == false)
+                {
+                    myA.getAttendence(sessions.currTerm, student);
+                    if (myA.addPresent(sessions.currTerm, student) == true)
+                    {
+                        if (myAs.setAttend(student, attendDate, this.classId, "P",sessions.currTerm) == true)
+                        {
+                            MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " marked present", "system info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.txtAbsent.Text = myA.absentdays.ToString();
+                            this.txtPresent.Text = myA.presentdays.ToString();
+                            this.txtTotal.Text = myA.totaldays.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("add atend failed");
+                        }
+                    }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("this tudent has already been marked do you want to modifly", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            //get the attence enter
+                            //update totals
+                            //updade attendancee sheet
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("already marked");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in btnNext_Click()" + ex);
+            }
         }
     }
 }

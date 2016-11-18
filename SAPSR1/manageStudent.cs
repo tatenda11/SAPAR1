@@ -15,8 +15,8 @@ namespace SAPSR1
         public string middleName;
         public string lastName;
         public int classId;
-        public Boolean dacCrud;
-        public Boolean dacFound;
+       /* public Boolean dacCrud;
+        public Boolean dacFound;*/
 
         public Boolean setStudent(int enId, string fname, string mname, string lname, int classid)
         {
@@ -47,6 +47,21 @@ namespace SAPSR1
             }
         }
 
+
+        public int countByClass(int classId)
+        {
+            try
+            {
+                string sql = "SELECT firstName FROM wizstudents WHERE classId =" + classId;
+                return rowCount(sql);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in getClass()  " + ex);
+                return 0;
+            }
+             
+        }
         public void getStudentByQuery(string sql)
         {
             try

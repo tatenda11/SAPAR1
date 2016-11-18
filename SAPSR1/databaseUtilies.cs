@@ -13,8 +13,8 @@ namespace SAPSR1
     {
         protected static MySqlConnection connection = new MySqlConnection(GetConnectionStrings());
         protected static MySqlCommand query = new MySqlCommand();
+        //protected static DataTable dt = new DataTable();
         //protected static MySqlDataAdapter da;
-        protected static string sql;
 
         public static string GetConnectionStrings()
         {
@@ -58,6 +58,24 @@ namespace SAPSR1
             }
         }
 
+        protected static int row_count(string sql)
+        {
+            try
+            {
+                checkConnection();
+                query.Connection = connection;
+                query.CommandText = sql;
+                return Convert.ToInt32(query.ExecuteScalar());
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed execute query  " + ex);
+                return 0;
+            }
+
+        }
+
+
         protected static int rowCount(string sql)
         {
             try
@@ -66,16 +84,15 @@ namespace SAPSR1
                 query.Connection = connection;
                 query.CommandText = sql;
                 MySqlDataReader myReader = query.ExecuteReader();
-                int count = 0;
-                while (myReader.Read())
-                {
-                    count = count + 1;
-                }
-                return count;
+                DataTable dt = new DataTable();
+                dt.Load(myReader);
+                int numberOfResults = dt.Rows.Count;
+                dt.Clear();
+                return numberOfResults; 
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show("Failed in manageUsers checkExist()  " + ex);
+                System.Windows.Forms.MessageBox.Show("Failed in sdbutilities rowCount()  " + ex);
                 return 0;
             }
             finally

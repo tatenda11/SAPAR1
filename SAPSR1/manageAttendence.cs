@@ -46,7 +46,7 @@ namespace SAPSR1
                     this.classId = Convert.ToInt32(dataReader["classId"]);
                     this.absentdays = Convert.ToInt32(dataReader["absentdays"]);
                     this.presentdays = Convert.ToInt32(dataReader["presentdays"]);
-                    this.totaldays = Convert.ToInt32(dataReader["totalday"]);
+                    this.totaldays = Convert.ToInt32(dataReader["totaldays"]);
                     this.enrollmentId = dataReader["enrollmentId"].ToString();
                     this.termPeriod = dataReader["termPeriod"].ToString();
                 }
@@ -66,9 +66,10 @@ namespace SAPSR1
             try
             {
                 /*increament total days by 1 and inceament present days by 1*/
-                this.presentdays += 1;
-                this.totaldays += 1;
-                string sql = "UPDATE wizattendence SET presentdays = '" + this.presentdays + "',totaldays = '" + this.totaldays + "'";
+                this.presentdays = this.presentdays + 1;
+                this.totaldays = this.totaldays +1;
+                System.Windows.Forms.MessageBox.Show(totaldays.ToString());
+                string sql = "UPDATE wizattendence SET presentdays = '" + this.presentdays + "',totaldays = '" + this.totaldays + "' WHERE enrollmentId = '"+ enId +"' LIMIT 1";
                 return executeQuery(sql);
             }
             catch (Exception ex)

@@ -125,22 +125,14 @@ namespace SAPSR1
         {
             try
             {
-                string sql = "SELECT COUNT(*) FROM wizclassrooms WHERE classRoomId = " + classId;
-                checkConnection();
-                query.Connection = connection;
-                query.CommandText = sql;
-                return Convert.ToInt32(query.ExecuteScalar());
+                string sql = "SELECT * FROM wizclassrooms WHERE classRoomId = " + classId;
+                return rowCount(sql);   
             }
             catch (Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Failed in getClass()  " + ex);
                 return 0;
             }
-            finally
-            {
-                connection.Close();
-            }
-
         } 
 
 
