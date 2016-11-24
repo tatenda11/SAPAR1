@@ -64,6 +64,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmExams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExams.Designer.cs">
+      <DependentUpon>frmExams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="manageExamPaper.cs" />
+    <Compile Include="manageExams.cs" />
     <Compile Include="Properties\appHelper.cs" />
     <Compile Include="databaseUtilies.cs" />
     <Compile Include="frmAddClass.cs">
@@ -118,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAttendance.resx">
       <DependentUpon>frmAttendance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExams.resx">
+      <DependentUpon>frmExams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>

@@ -10,7 +10,7 @@ namespace SAPSR1
     class manageattendsheet:databaseUtilies
     {
         public string enrolmentId;
-        public DateTime entryData;
+        public string entryData;
         public int classId;
         public string status;
         public string termId;
@@ -59,19 +59,15 @@ namespace SAPSR1
         {
             try
             {
-                checkConnection\();
-                string sql = "SELECT status FROM wizattendsheet WHERE enrolmentId  = '" + enId + "'  AND entryData = '" + atnDate + "' ";
+                checkConnection();
+                string sql = "SELECT * FROM wizattendsheet WHERE enrolmentId  = '" + enId + "'  AND entryData = '" + atnDate + "' ";
                 query.Connection = connection;
                 query.CommandText = sql;
                 MySqlDataReader dataReader = query.ExecuteReader();
-                while (dataReader.Read())
+                while (dataReader.Read()) 
                 {
                     this.enrolmentId = dataReader["enrolmentId"].ToString();
-                    this.firstName = dataReader["firstName"].ToString();
-                    this.lastName = dataReader["lastName"].ToString();
-                    this.middleName = dataReader["middleName"].ToString();
-                    this.systemId = Convert.ToInt32(dataReader["systemId"]);
-                    this.classId = Convert.ToInt32(dataReader["classId"]);
+                    this.status = dataReader["status"].ToString();
                 }
             }
             catch(Exception ex)
@@ -81,6 +77,19 @@ namespace SAPSR1
             finally
             {
                 connection.Close();
+            }
+        }
+        public Boolean updateStatus(string enId, string atnDate, string newStatus)
+        {
+            try
+            {
+                string sql = "UPDATE wizattendsheet SET status = '" + newStatus+ "' WHERE enrolmentId  = '" + enId + "'  AND entryData = '" + atnDate + "' LIMIT 1";
+                return executeQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in  updateStatus()  " + ex);
+                return false;
             }
         }
     }

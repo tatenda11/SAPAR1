@@ -37,7 +37,7 @@ namespace SAPSR1
                     this.classId = myC.classRoomId;
                     this.classTotal = 3;
                     this.lbCounter.Text = page.ToString() + "/" + classTotal.ToString();
-                    this.fillStudents();
+                    //this.fillStudents("SELECT * FROM wizstudents WHERE classId =" + this.classId);
 
                 } 
             }
@@ -62,18 +62,20 @@ namespace SAPSR1
             }
         }
 
-        public void fillStudents()
+        public void fillStudents(string sql)
         {
             try
             {
                 checkConnection();
                 query.Connection = connection;
-                query.CommandText = "SELECT * FROM wizstudents WHERE classId =" + this.classId;
+                query.CommandText = sql;
                 da.SelectCommand = query;
                 dt.Clear();
                 da.Fill(dt);
                 this.dgvStudents.DataSource = dt;
+               // dt.Clear();
                 connection.Close();
+
             }
             catch (Exception ex)
             {
@@ -100,7 +102,7 @@ namespace SAPSR1
         {
             try
             {
-                if(page < 0)
+                if(page < 0 || page > classTotal)
                 {
                     page = 0;
                 }
@@ -130,7 +132,11 @@ namespace SAPSR1
         {
             try
             {
-                if(page < classTotal)
+                if (page < 0)
+                {
+                    page = 0;
+                }
+                if (page < classTotal)
                 {
                     this.lbCounter.Text = page.ToString() + "/" + classTotal.ToString(); 
                     manageStudent myS = new manageStudent();
@@ -190,23 +196,162 @@ namespace SAPSR1
                     }
                     else
                     {
-                        DialogResult dialogResult = MessageBox.Show("this tudent has already been marked do you want to modifly", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            //get the attence enter
-                            //update totals
-                            //updade attendancee sheet
-                        }
+                        MessageBox.Show("failed tp add present in sumation file");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("already marked");
+                    DialogResult dialogResult = MessageBox.Show("this student has already been marked do you want to modifly", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        //get the attence enter
+                        myAs.getAttend(student, attendDate);
+                        //update totals
+                       if(myAs.status == "P")
+                        {
+                            MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " already marked present", "system info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                       else
+                        {
+                            myA.getAttendence(sessions.currTerm, student);
+                            myA.updateEntry(sessions.currTerm, student, "undo_Absent");
+                            if(myAs.updateStatus(student,attendDate,"P") == true)
+                            {
+                                this.txtAbsent.Text = myA.absentdays.ToString();
+                                this.txtPresent.Text = myA.presentdays.ToString();
+                                this.txtTotal.Text = myA.totaldays.ToString();
+                                MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " updated marked present", "system info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            }
+                            else
+                            {
+                                MessageBox.Show("failed to update", "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        //updade attendancee sheet
+                    }
                 }
             }
             catch(Exception ex)
             {
                 MessageBox.Show("failed in btnNext_Click()" + ex);
+            }
+        }
+
+        private void btnAbsent_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var student = this.txtEnId.Text;
+                var attendDate = this.txtDate.Value.ToShortDateString();
+                manageAttendence myA = new manageAttendence();
+                manageattendsheet myAs = new manageattendsheet();
+                myAs.checkEntered(student, attendDate);
+                if (myAs.dacFound == false)
+                {
+                    myA.getAttendence(sessions.currTerm, student);
+                    if (myA.addAbsent(sessions.currTerm, student) == true)
+                    {
+                        if (myAs.setAttend(student, attendDate, this.classId, "A", sessions.currTerm) == true)
+                        {
+                            MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " marked absent", "system info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.txtAbsent.Text = myA.absentdays.ToString();
+                            this.txtPresent.Text = myA.presentdays.ToString();
+                            this.txtTotal.Text = myA.totaldays.ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("add atend failed");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("failed tp add present in sumation file");
+                    }
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("this student has already been marked do you want to modifly", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        //get the attence enter
+                        myAs.getAttend(student, attendDate);
+                        //update totals
+                        if (myAs.status == "A")
+                        {
+                            MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " already marked Absent", "system info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                        }
+                        else
+                        {
+                            myAs.getAttend(student, attendDate);
+                            myA.getAttendence(sessions.currTerm, student);
+                            myA.updateEntry(sessions.currTerm, student, "undo_present");
+                            if (myAs.updateStatus(student, attendDate, "A") == true)
+                            {
+                                this.txtAbsent.Text = myA.absentdays.ToString();
+                                this.txtPresent.Text = myA.presentdays.ToString();
+
+                                this.txtTotal.Text = myA.totaldays.ToString();
+                                MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " updated marked absent", "system info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                            }
+                            else
+                            {
+                                MessageBox.Show("failed to update", "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        //updade attendancee sheet
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in btnNext_Click()" + ex);
+            }
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var condition = this.cmbCondition.Text;
+                var attendDate = this.txtDate.Value.ToShortDateString();
+                string sql;
+                switch (condition)
+                {
+                    case "present":
+                        sql = "SELECT * FROM wizstudents WHERE classId = '"+ this.classId + "' AND enrolmentId IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '"+ attendDate +"'AND status = P ) ";
+                        break;
+                    case "absent":
+                        sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "'AND status = A ) ";
+                        break;
+                    default:
+                        sql = "SELECT * FROM wizstudents WHERE classId =" + this.classId;
+                    break;
+                }
+                //MessageBox.Show(condition);
+                this.fillStudents(sql);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in btnNext_Click()" + ex);
+            }
+        }
+
+        private void dgvStudents_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+           
+        }
+
+        private void dgvStudents_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+               //var classId = dgvStudents.SelectedRows[0].Cells[3].Value.ToString();
+                //MessageBox.Show(classId);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed in dgvStudents_SelectionChanged()" + ex);
             }
         }
     }

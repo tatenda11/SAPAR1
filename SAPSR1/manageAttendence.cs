@@ -68,7 +68,6 @@ namespace SAPSR1
                 /*increament total days by 1 and inceament present days by 1*/
                 this.presentdays = this.presentdays + 1;
                 this.totaldays = this.totaldays +1;
-                System.Windows.Forms.MessageBox.Show(totaldays.ToString());
                 string sql = "UPDATE wizattendence SET presentdays = '" + this.presentdays + "',totaldays = '" + this.totaldays + "' WHERE enrollmentId = '"+ enId +"' LIMIT 1";
                 return executeQuery(sql);
             }
@@ -86,7 +85,32 @@ namespace SAPSR1
                 /*increament total days by 1 and inceament absentdays days by 1*/
                 this.absentdays += 1;
                 this.totaldays += 1;
-                string sql = "UPDATE wizattendence SET absentdays = '" + this.absentdays + "',totaldays = '" + this.totaldays + "'";
+                string sql = "UPDATE wizattendence SET absentdays = '" + this.absentdays + "',totaldays = '" + this.totaldays + "'  WHERE enrollmentId = '" + enId + "' LIMIT 1";
+                return executeQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in getAttendence()  " + ex);
+                return false;
+            }
+        }
+
+        public Boolean updateEntry(string term, string enId, string item)
+        {
+            try
+            {
+                if(item == "undo_present")
+                {
+                    this.presentdays = this.presentdays - 1;
+                    this.absentdays = this.absentdays + 1;
+                }
+                else
+                {
+                    this.presentdays = this.presentdays + 1;
+                    this.absentdays = this.absentdays - 1;
+                }
+                string sql = "UPDATE wizattendence SET presentdays = '" + this.presentdays + "',absentdays = '" + this.absentdays + "' WHERE enrollmentId = '" + enId + "' LIMIT 1";
+                System.Windows.Forms.MessageBox.Show(sql);
                 return executeQuery(sql);
             }
             catch (Exception ex)

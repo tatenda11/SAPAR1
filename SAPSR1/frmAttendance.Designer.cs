@@ -88,6 +88,7 @@
             this.btnAbsent.TabIndex = 15;
             this.btnAbsent.Text = "Mark Absent";
             this.btnAbsent.UseSelectable = true;
+            this.btnAbsent.Click += new System.EventHandler(this.btnAbsent_Click);
             // 
             // btnPresent
             // 
@@ -364,6 +365,8 @@
             this.dgvStudents.Name = "dgvStudents";
             this.dgvStudents.Size = new System.Drawing.Size(874, 184);
             this.dgvStudents.TabIndex = 2;
+            this.dgvStudents.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.dgvStudents_RowStateChanged);
+            this.dgvStudents.SelectionChanged += new System.EventHandler(this.dgvStudents_SelectionChanged);
             // 
             // cmbCondition
             // 
@@ -385,6 +388,7 @@
             this.btnFilter.TabIndex = 15;
             this.btnFilter.Text = "filter";
             this.btnFilter.UseSelectable = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // btnNext
             // 

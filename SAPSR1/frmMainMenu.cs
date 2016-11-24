@@ -32,8 +32,8 @@ namespace SAPSR1
         {
             //frmAddUser addUser = new frmAddUser();
             //addUser.ShowDialog();
-            frmAttendance att = new frmAttendance();
-            att.ShowDialog();
+            frmExams exm = new frmExams();
+            exm.ShowDialog();
             //msmMain.Theme = MetroFramework.MetroThemeStyle.Dark;
             /*var m = new Random();
             int next = m.Next(0, 13);
