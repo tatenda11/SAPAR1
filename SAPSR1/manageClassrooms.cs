@@ -56,6 +56,7 @@ namespace SAPSR1
         {
             try
             {
+                connection.Close();
                 checkConnection();
                 string sql = "SELECT * FROM wizclassrooms WHERE classRoomId =" + classId.ToString();
                 query.Connection = connection;

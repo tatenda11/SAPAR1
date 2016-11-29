@@ -12,5 +12,6 @@ namespace SAPSR1
         public static int userId;
         public static string curPeriod;
         public static string currTerm;
+        public static Double  fees;
     }
 }

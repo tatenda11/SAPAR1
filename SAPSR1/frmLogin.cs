@@ -47,8 +47,8 @@ namespace SAPSR1
                     {
                         MessageBox.Show("Welcome" + usrname, "login Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         /*setup sessions here*/
-                        frmMainMenu myMenu = new frmMainMenu();
-                        myMenu.ShowDialog();
+                        ///frmMainMenu myMenu = new frmMainMenu();
+                        //myMenu.ShowDialog();
                         this.Dispose();
                     }
                     else

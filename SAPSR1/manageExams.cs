@@ -10,23 +10,24 @@ namespace SAPSR1
     class manageExams:databaseUtilies
     {
         public int examId;
-        public int subjectId;
+        public string subjectId;
         public string examTyp;
         public string termId;
         public int classGrade;
         public int teacherId;
-        public string description; 
+        public string description;
+        public string title;
 
         public manageExams()
         {
             connection.Close();
         }
 
-        public Boolean setExam(int sub, string typ, string term,int grade,int tchr, string des)
+        public Boolean setExam(string sub, string typ, string term,int grade,int tchr, string des, string title)
         {
             try
             {
-                string sql = "INSERT INTO wizexams (subjectId,examTyp,termId,classGrade,teacherId,description) VALUES ('"+ sub +"','" + typ + "', '" + term + "','" + grade +"','"+ teacherId+"','"+ des +"')";
+                string sql = "INSERT INTO wizexams (subjectId,examTyp,termId,classGrade,teacherId,examDes,title) VALUES ('"+ sub +"','" + typ + "', '" + term + "','" + grade +"','"+ tchr  + "','"+ des +"','"+ title +"')";
                 return executeQuery(sql);
 
             }
@@ -41,7 +42,7 @@ namespace SAPSR1
         {
             try
             {
-                string sql = "UPDATE wizexams SET subjectId = '" + this.subjectId + "',examTyp = '" + this.examTyp + "', termId = '" + this.termId + "', grade = '" + this.classGrade + "',description = '" + this.description + "' WHERE examId = '" + exam + "'";
+                string sql = "UPDATE wizexams SET subjectId = '" + this.subjectId + "',examTyp = '" + this.examTyp + "', termId = '" + this.termId + "', classGrade = '" + this.classGrade + "',examDes = '" + this.description + "',title = '" + this.title + "' WHERE examId = '" + exam + "'";
                 return executeQuery(sql);
             }
             catch(Exception ex)
@@ -63,13 +64,14 @@ namespace SAPSR1
                 MySqlDataReader dataReader = query.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    this.examId = Convert.ToInt32(dataReader["systemId"]);
-                    this.classGrade = Convert.ToInt32(dataReader["systemId"]);
-                    this.examTyp= dataReader["lastName"].ToString();
-                    this.subjectId = Convert.ToInt32(dataReader["systemId"]);
+                    this.examId = Convert.ToInt32(dataReader["examId"]);
+                    this.classGrade = Convert.ToInt32(dataReader["classGrade"]);
+                    this.examTyp= dataReader["examTyp"].ToString();
+                    this.subjectId = dataReader["subjectId"].ToString();
                     this.teacherId = Convert.ToInt32(dataReader["teacherId"]);
-                    this.termId = dataReader["lastName"].ToString();
-                    this.description = dataReader["description"].ToString();
+                    this.termId = dataReader["termId"].ToString();
+                    this.description = dataReader["examDes"].ToString();
+                    this.title = dataReader["title"].ToString(); ;
                 }
             }
             catch(Exception ex)

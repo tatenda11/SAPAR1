@@ -15,6 +15,7 @@ namespace SAPSR1
         public string prevTerm;
         public string nextTerm;
         public int enrollmentId;
+        public Double fees;
         public int transHeader;
 
         public Boolean updateCntrl()
@@ -47,6 +48,7 @@ namespace SAPSR1
                     this.nextPeriod = dataReader["nextPeriod"].ToString();
                     this.nextTerm = dataReader["nextTerm"].ToString();
                     this.prevPeriod = dataReader["prevPeriod"].ToString();
+                    this.fees = Convert.ToDouble(dataReader["feesAmount"]);
                     this.prevTerm = dataReader["prevTerm"].ToString();
                     this.transHeader = Convert.ToInt32(dataReader["transHeader"]);
                 }
@@ -55,21 +57,32 @@ namespace SAPSR1
             {
                 System.Windows.Forms.MessageBox.Show("Failed in getCntrl()  " + ex);
             }
+            finally
+            {
+                connection.Close();
+            }
         }
 
-        public Boolean useTranHeader()
+        public int useTranHeader(int header)
         {
             try
             {
-                this.transHeader += 1;
-                String sql = "UPDATE control SET transHeader = '" + this.transHeader + "' ";
-                return executeQuery(sql);
+                header += 1;
+                String sql = "UPDATE control SET transHeader = '" + header + "' ";
+                if(executeQuery(sql) == true)
+                {
+                    return header;
+                }
+                else
+                {
+                    return header;
+                }
 
             }
             catch(Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Failed in useTranHeader()  " + ex);
-                return false;
+                return 0;
             }
         }
         

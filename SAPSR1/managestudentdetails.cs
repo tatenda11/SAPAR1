@@ -18,13 +18,16 @@ namespace SAPSR1
         public string mobileNumber;
         public string email;
     
-
-        public Boolean setStudentDetails(string add, string guardianFname, string guardianSname, string rel, string cell, string email)
+        public void managestudentdetail()
+        {
+            connection.Close();
+        }
+        public Boolean setStudentDetails(int enId,string add, string guardianFname, string guardianSname, string rel, string cell, string email)
         {
             try
             {
-                string sql = "INSERT INTO wiz studentdetails (address,guardianFname,guardianSname,relationship,mobileNumber,email)";
-                sql += "VALUES ('" + add + "','" + guardianFname + "','" + guardianSname + "','" + rel + "', '" + cell + "', '" + email + "')";
+                string sql = "INSERT INTO wizstudentdetails (enrolmentId,address,guardianFname,guardianSname,relationship,mobileNumber,email)";
+                sql += "VALUES ('"+ enId + "','" + add + "','" + guardianFname + "','" + guardianSname + "','" + rel + "', '" + cell + "', '" + email + "')";
                 return executeQuery(sql);
             }
             catch (Exception ex)
@@ -38,7 +41,7 @@ namespace SAPSR1
         {
             try
             {
-                string sql = "UPDATE studentdetails SET address = '" + this.address + "',guardianFname = '" + this.guardianFname + "', guardianSname = '"+ this.guardianSname +"', relationship = '" + this.relationship + "', ,mobileNumber = '" + this.mobileNumber + "', email = '" + this.email + "' WHERE enrolmentId = '" + enId +"' LIMIT 1";
+                string sql = "UPDATE wizstudentdetails SET address = '" + this.address + "',guardianFname = '" + this.guardianFname + "', guardianSname = '"+ this.guardianSname +"', relationship = '" + this.relationship + "' ,mobileNumber = '" + this.mobileNumber + "', email = '" + this.email + "' WHERE enrolmentId = '" + enId +"' LIMIT 1";
                 return executeQuery(sql);
             }
             catch (Exception ex)
@@ -54,7 +57,7 @@ namespace SAPSR1
             {
                 checkConnection();
                 query.Connection = connection;
-                query.CommandText = "SELECT * FROM studentdetails WHERE enrolmentId = '" + enId + "' ";
+                query.CommandText = "SELECT * FROM wizstudentdetails WHERE enrolmentId = '" + enId + "' ";
                 MySqlDataReader dataReader = query.ExecuteReader();
                 while (dataReader.Read())
                 {
@@ -76,13 +79,27 @@ namespace SAPSR1
         {
             try
             {
-                string sql = "DELETE FROM studentdetails WHERE enrolmentId = '" + enId + "' LIMIT 1";
+                string sql = "DELETE FROM wizstudentdetails WHERE enrolmentId = '" + enId + "' LIMIT 1";
                 return executeQuery(sql);
             }
             catch(Exception ex)
             {
                 System.Windows.Forms.MessageBox.Show("Failed in deleteStudent()  " + ex);
                 return false;
+            }
+        }
+
+        public int checkExists(int enrlId)
+        {
+            try
+            {
+                string sql = "SELECT enrolmentId FROM wizstudentdetails WHERE enrolmentId =" + enrlId;
+                return rowCount(sql);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in deleteStudent()  " + ex);
+                return 14;
             }
         }
 

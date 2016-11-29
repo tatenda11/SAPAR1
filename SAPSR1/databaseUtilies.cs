@@ -41,6 +41,7 @@ namespace SAPSR1
         {
             try
             {
+                connection.Close();
                 checkConnection();
                 query.Connection = connection;
                 query.CommandText = sql;

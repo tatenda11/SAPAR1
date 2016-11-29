@@ -64,14 +64,58 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="bzlTransactions.cs" />
     <Compile Include="frmExams.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmExams.Designer.cs">
       <DependentUpon>frmExams.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmManagerUsersMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManagerUsersMain.designer.cs">
+      <DependentUpon>frmManagerUsersMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageStaffr.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageStaffr.designer.cs">
+      <DependentUpon>frmManageStaffr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageStudents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmManageStudents.designer.cs">
+      <DependentUpon>frmManageStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStaffDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStaffDetails.Designer.cs">
+      <DependentUpon>frmStaffDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStudentDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStudentDetail.designer.cs">
+      <DependentUpon>frmStudentDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTranscations.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTranscations.designer.cs">
+      <DependentUpon>frmTranscations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUtility.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUtility.Designer.cs">
+      <DependentUpon>frmUtility.cs</DependentUpon>
+    </Compile>
     <Compile Include="manageExamPaper.cs" />
     <Compile Include="manageExams.cs" />
+    <Compile Include="managefeesBalance.cs" />
     <Compile Include="Properties\appHelper.cs" />
     <Compile Include="databaseUtilies.cs" />
     <Compile Include="frmAddClass.cs">
@@ -97,12 +141,6 @@
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMainMenu.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMainMenu.Designer.cs">
-      <DependentUpon>frmMainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="manageAttendence.cs" />
     <Compile Include="manageBalance.cs" />
@@ -133,8 +171,26 @@
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmMainMenu.resx">
-      <DependentUpon>frmMainMenu.cs</DependentUpon>
+    <EmbeddedResource Include="frmManagerUsersMain.resx">
+      <DependentUpon>frmManagerUsersMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageStaffr.resx">
+      <DependentUpon>frmManageStaffr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageStudents.resx">
+      <DependentUpon>frmManageStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStaffDetails.resx">
+      <DependentUpon>frmStaffDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStudentDetail.resx">
+      <DependentUpon>frmStudentDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTranscations.resx">
+      <DependentUpon>frmTranscations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUtility.resx">
+      <DependentUpon>frmUtility.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -146,6 +202,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
