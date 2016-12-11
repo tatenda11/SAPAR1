@@ -14,6 +14,7 @@ namespace SAPSR1
         public string currTerm;
         public string prevTerm;
         public string nextTerm;
+        public int empId;
         public int enrollmentId;
         public Double fees;
         public int transHeader;
@@ -22,7 +23,7 @@ namespace SAPSR1
         {
             try
             {
-                string sql = "UPDATE control SET currentPeriod = '"+ this.currentPeriod + "', prevPeriod = '"+ this.prevPeriod +"', nextPeriod = '" + this.nextPeriod + "', currTerm = '" + this.currTerm + "', prevTerm = '" + this.prevTerm + "', nextTerm = '" + this.nextTerm+ "', enrollmentId = '" + this.enrollmentId + "', transHeader = '" + this.transHeader +  "' ";
+                string sql = "UPDATE control SET currentPeriod = '"+ this.currentPeriod + "', prevPeriod = '"+ this.prevPeriod +"', nextPeriod = '" + this.nextPeriod + "', currTerm = '" + this.currTerm + "', prevTerm = '" + this.prevTerm + "', nextTerm = '" + this.nextTerm+ "', enrollmentId = '" + this.enrollmentId + "', transHeader = '" + this.transHeader + "', empId = '"+ this.empId  + "' ";
                 return executeQuery(sql);
             }
             catch (Exception ex)
@@ -51,6 +52,7 @@ namespace SAPSR1
                     this.fees = Convert.ToDouble(dataReader["feesAmount"]);
                     this.prevTerm = dataReader["prevTerm"].ToString();
                     this.transHeader = Convert.ToInt32(dataReader["transHeader"]);
+                    this.empId = Convert.ToInt32(dataReader["empId"]); 
                 }
             }
             catch (Exception ex)
@@ -85,7 +87,29 @@ namespace SAPSR1
                 return 0;
             }
         }
-        
+
+        public int useEmpHeader(int header)
+        {
+            try
+            {
+                header += 1;
+                String sql = "UPDATE control SET empId = '" + header + "' ";
+                if (executeQuery(sql) == true)
+                {
+                    return header;
+                }
+                else
+                {
+                    return header;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in useTranHeader()  " + ex);
+                return 0;
+            }
+        }
         public Boolean useEnrolmentId()
         {
             try

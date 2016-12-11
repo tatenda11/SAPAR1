@@ -31,6 +31,7 @@ namespace SAPSR1
             try
             {
                 this.fillExams();
+                this.metroTabPage1.Focus();
             }
             catch(Exception ex)
             {
@@ -129,10 +130,17 @@ namespace SAPSR1
                 else
                 {
                     manageExams myE = new manageExams();
-                    if(myE.setExam(subject,typ,sessions.currTerm,Convert.ToInt32(grade),sessions.userId,des,title) == true)
+                    if(myE.checkEndTermExamSet(subject,grade,sessions.currTerm)== false)
                     {
-                        MessageBox.Show("exam added sucessifully", "system notificaton", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.fillExams();
+                        if (myE.setExam(subject, typ, sessions.currTerm, Convert.ToInt32(grade), sessions.userId, des, title) == true)
+                        {
+                            MessageBox.Show("exam added sucessifully", "system notificaton", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.fillExams();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(subject + " end of term exam already created ", "system notificaton", MessageBoxButtons.OK, MessageBoxIcon.Hand);
                     }
                 }
            }
@@ -321,6 +329,85 @@ namespace SAPSR1
             catch(Exception ex)
             {
                 MessageBox.Show("applicaton error " + ex);
+            }
+        }
+
+        private void txtExamTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtExamTitle_Leave(object sender, EventArgs e)
+        {
+            var Exam = this.txtExamTitle.Text;
+            if (validator.isValidAlphaNumeric(Exam) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtExamTitle.Focus();
+            }
+        }
+
+        private void txtPaperTitle_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbGrade_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                manageClassrooms myC = new manageClassrooms();
+                myC.getClass(sessions.classId);
+                if(myC.classGrade.ToString() != this.cmbGrade.Text)
+                {
+                    MessageBox.Show("You can only create exams for the grade you teach", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    this.cmbGrade.Focus();
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in cmbGrade_Leave() " + ex.Message);
+            }
+        }
+
+        private void txtExamDes_Leave(object sender, EventArgs e)
+        {
+            var ExamDes = this.txtExamDes.Text;
+            if (validator.isValidAlphaNumeric(ExamDes) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtExamDes.Focus();
+            }
+        }
+
+        private void txtPaperTitle_Leave(object sender, EventArgs e)
+        {
+            var pper = this.txtPaperTitle.Text;
+            if (validator.isValidAlphaNumeric(pper) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtPaperTitle.Focus();
+            }
+        }
+
+        private void txtPossibleMark_Leave(object sender, EventArgs e)
+        {
+            var pmark = this.txtPossibleMark.Text;
+            if (validator.isValidMoney(pmark) == false)
+            {
+                MessageBox.Show("only numeric characters required for this field", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtPossibleMark.Focus();
+            }
+        }
+
+        private void txtPaperDes_Leave(object sender, EventArgs e)
+        {
+            var pperdes = this.txtPaperDes.Text;
+            if (validator.isValidAlphaNumeric(pperdes) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtPaperDes.Focus();
             }
         }
     }

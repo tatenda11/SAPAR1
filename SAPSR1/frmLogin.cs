@@ -45,11 +45,28 @@ namespace SAPSR1
                     Boolean access = myU.loginUser(usrname, password);
                     if (access == true)
                     {
+                        myU.getUser(myU.userId);
+                        sessions.userId = myU.userId;
+                        sessions.userType = myU.userType;
+                        MessageBox.Show(myU.userType);
                         MessageBox.Show("Welcome" + usrname, "login Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        /*setup sessions here*/
-                        ///frmMainMenu myMenu = new frmMainMenu();
-                        //myMenu.ShowDialog();
-                        this.Dispose();
+                        if (myU.userType == "A")
+                        {
+                            frmMainMenuUpdate myMenu = new frmMainMenuUpdate();
+                            myMenu.ShowDialog();
+                            this.Dispose();
+                        }
+                        else if(myU.userType == "T")
+                        {
+                            frmTeacherMainMenu myMenu = new frmTeacherMainMenu();
+                            myMenu.ShowDialog();
+                            this.Dispose();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Account type contact system admin", "Verification Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            Application.Exit();
+                        }
                     }
                     else
                     {

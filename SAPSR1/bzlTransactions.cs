@@ -55,7 +55,7 @@ namespace SAPSR1
                             this.accumatedPayement = myFb.PaymentIn + transAmount;
                             myFb.CurrentBal = this.curBalance;
                             myFb.ClosingBal = this.curBalance;
-                            myFb.PaymentIn = myFb.PaymentIn + transAmount;
+                            myFb.PaymentIn = accumatedPayement;
                             if (myFb.updateBalances(accountId,term) == true)
                             {
                                 System.Windows.Forms.MessageBox.Show("balance updated");
@@ -70,6 +70,38 @@ namespace SAPSR1
             {
                 System.Windows.Forms.MessageBox.Show("system error " + ex);
             }
+        }
+
+        public void DeleteTransacation()
+        {
+            try
+            {
+                //intiate objects
+                managefeesBalance myB = new managefeesBalance();
+                manageTransaction myT = new manageTransaction();
+                //get transaction
+                myT.getTransacation(this.tranId);
+                //update balance
+                myB.getBalance(myT.transAccount, myT.transTerm);
+                curBalance = myB.CurrentBal + myT.transAmount;
+                accumatedPayement = myB.PaymentIn - myT.transAmount;
+                myB.CurrentBal = this.curBalance;
+                myB.ClosingBal = this.curBalance;
+                myB.PaymentIn = accumatedPayement;
+                if(myB.updateBalances(myT.transAccount, myT.transTerm) == true)
+                {
+                    //finally delete transaction
+                    if(myT.DeleteTrans(this.tranId) == true)
+                    {
+                        this.dacCrud = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("system error " + ex);
+            }
+
         }
 
     }

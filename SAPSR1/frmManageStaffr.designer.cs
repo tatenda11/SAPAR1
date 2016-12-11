@@ -100,6 +100,7 @@
             this.BtnStaff.TabIndex = 25;
             this.BtnStaff.Text = "Add Staff";
             this.BtnStaff.UseSelectable = true;
+            this.BtnStaff.Click += new System.EventHandler(this.BtnStaff_Click);
             // 
             // btnUpdate
             // 
@@ -116,7 +117,7 @@
             // 
             // 
             this.txtSearch.CustomButton.Image = null;
-            this.txtSearch.CustomButton.Location = new System.Drawing.Point(692, 2);
+            this.txtSearch.CustomButton.Location = new System.Drawing.Point(676, 2);
             this.txtSearch.CustomButton.Name = "";
             this.txtSearch.CustomButton.Size = new System.Drawing.Size(31, 31);
             this.txtSearch.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;

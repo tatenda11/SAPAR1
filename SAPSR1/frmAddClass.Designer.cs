@@ -44,12 +44,14 @@ namespace SAPSR1
             this.txtClassName = new MetroFramework.Controls.MetroTextBox();
             this.btnClose = new MetroFramework.Controls.MetroButton();
             this.dgvClassInfo = new System.Windows.Forms.DataGridView();
+            this.btnRefresh = new MetroFramework.Controls.MetroButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClassInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnRefresh);
             this.groupBox1.Controls.Add(this.btnUpdate);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Controls.Add(this.metroLabel4);
@@ -79,7 +81,7 @@ namespace SAPSR1
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(643, 91);
+            this.btnAdd.Location = new System.Drawing.Point(643, 80);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(138, 40);
             this.btnAdd.TabIndex = 8;
@@ -173,6 +175,8 @@ namespace SAPSR1
             this.cmbTeacher.Size = new System.Drawing.Size(238, 29);
             this.cmbTeacher.TabIndex = 2;
             this.cmbTeacher.UseSelectable = true;
+            this.cmbTeacher.TextChanged += new System.EventHandler(this.cmbTeacher_TextChanged);
+            this.cmbTeacher.Leave += new System.EventHandler(this.cmbTeacher_Leave);
             // 
             // metroLabel1
             // 
@@ -212,6 +216,8 @@ namespace SAPSR1
             this.txtClassName.UseSelectable = true;
             this.txtClassName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtClassName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtClassName.Click += new System.EventHandler(this.txtClassName_Click);
+            this.txtClassName.Leave += new System.EventHandler(this.txtClassName_Leave);
             // 
             // btnClose
             // 
@@ -224,6 +230,7 @@ namespace SAPSR1
             // 
             // dgvClassInfo
             // 
+            this.dgvClassInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvClassInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvClassInfo.Location = new System.Drawing.Point(32, 280);
             this.dgvClassInfo.Name = "dgvClassInfo";
@@ -232,6 +239,16 @@ namespace SAPSR1
             this.dgvClassInfo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClassInfo_CellContentClick);
             this.dgvClassInfo.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClassInfo_CellContentClick);
             this.dgvClassInfo.SelectionChanged += new System.EventHandler(this.dgvClassInfo_SelectionChanged);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Location = new System.Drawing.Point(643, 126);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(138, 40);
+            this.btnRefresh.TabIndex = 10;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseSelectable = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // frmAddClass
             // 
@@ -274,5 +291,6 @@ namespace SAPSR1
         private MetroFramework.Controls.MetroTextBox txtClassName;
         private MetroFramework.Controls.MetroButton btnClose;
         private DataGridView dgvClassInfo;
+        private MetroFramework.Controls.MetroButton btnRefresh;
     }
 }

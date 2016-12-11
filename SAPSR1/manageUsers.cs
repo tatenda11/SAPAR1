@@ -16,6 +16,7 @@ namespace SAPSR1
         public string password;
         public string userType;
         public string email;
+        public string empId;
         /******************Flags*********************************/
         public Boolean dacCrud;
         public Boolean dacFound;
@@ -37,13 +38,13 @@ namespace SAPSR1
             }
         }
 
-        public Boolean setUser(string uName, string password, string uTyp, string email)
+        public Boolean setUser(string uName, string password, string uTyp, string email, string emId)
         {
             try
             {
                 checkConnection();
-                string sql = "INSERT INTO wizuser (userId,userName,password,userType,email)";
-                sql += "VALUES ('','" + uName + "', '" + password + "','" + uTyp + "','" + email + "')";
+                string sql = "INSERT INTO wizuser (userId,userName,password,userType,email,empId)";
+                sql += "VALUES ('','" + uName + "', '" + password + "','" + uTyp + "','" + email + "','"+ emId + "')";
                 query.Connection = connection;
                 query.CommandText = sql;
                 int i = query.ExecuteNonQuery();
@@ -104,6 +105,7 @@ namespace SAPSR1
                 while (myReader.Read())
                 {
                     count = count + 1;
+                    this.userId = Convert.ToInt32(myReader["userId"]);
                 }
                 this.dacFound = (count > 0) ? true : false;
                 return this.dacFound;
@@ -134,6 +136,7 @@ namespace SAPSR1
                     this.userName = dataReader["userName"].ToString();
                     this.password = dataReader["password"].ToString();
                     this.email = dataReader["email"].ToString();
+                    this.userType = dataReader["userType"].ToString();
                 }
             }
             catch (Exception e)
@@ -145,6 +148,69 @@ namespace SAPSR1
                 connection.Close();
             }
         }
+
+        public Boolean checkEmployeeIdExist(string emp)
+        {
+            try
+            {
+                checkConnection();
+                string sql = "SELECT userId FROM wizuser WHERE empId = '" + emp + "'";
+                query.Connection = connection;
+                query.CommandText = sql;
+                MySqlDataReader myReader = query.ExecuteReader();
+                int count = 0;
+                while (myReader.Read())
+                {
+                    count = count + 1;
+                }
+                this.dacFound = (count > 0) ? true : false;
+                return this.dacFound;
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in manageUsers adminAuth()  " + ex);
+                return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public Boolean adminAuth(string usr,string  pass)
+        {
+            try
+            {
+                string sql = "SELECT * FROM wizuser WHERE userName = '" + usr + "' AND password = '" + pass + "' AND userType = 'A' LIMIT 1";
+                if (rowCount(sql) == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in manageUsers adminAuth()  " + e);
+                return false;
+            }
+        }
+        public Boolean editUser(int user)
+        {
+            try
+            {
+                string sql = "UPDATE wizuser SET userType = '"+ this.userType +"' WHERE userId = '"+ this.userId +"' LIMIT 1";
+                return executeQuery(sql);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in manageUsers editUser()  " + ex);
+                return false;
+            }
+        }
+
     }
 }
 

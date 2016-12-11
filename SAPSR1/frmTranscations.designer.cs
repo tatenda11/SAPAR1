@@ -59,7 +59,6 @@
             this.txtTranDetails = new MetroFramework.Controls.MetroTextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvTranscations = new System.Windows.Forms.DataGridView();
-            this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -417,6 +416,7 @@
             this.metroButton1.TabIndex = 22;
             this.metroButton1.Text = "search ";
             this.metroButton1.UseSelectable = true;
+            this.metroButton1.Click += new System.EventHandler(this.metroButton1_Click);
             // 
             // txtEnrolId
             // 
@@ -601,25 +601,16 @@
             this.dgvTranscations.TabIndex = 0;
             this.dgvTranscations.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTranscations_CellDoubleClick);
             // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Enabled = false;
-            this.btnUpdate.Location = new System.Drawing.Point(159, 374);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(114, 37);
-            this.btnUpdate.TabIndex = 23;
-            this.btnUpdate.Text = "Update Transcation";
-            this.btnUpdate.UseSelectable = true;
-            // 
             // btnDelete
             // 
             this.btnDelete.Enabled = false;
-            this.btnDelete.Location = new System.Drawing.Point(293, 374);
+            this.btnDelete.Location = new System.Drawing.Point(149, 374);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(114, 37);
             this.btnDelete.TabIndex = 24;
             this.btnDelete.Text = "Delete Transaction";
             this.btnDelete.UseSelectable = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // frmTransactions
             // 
@@ -627,7 +618,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(963, 667);
             this.Controls.Add(this.btnDelete);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -676,7 +666,6 @@
         private System.Windows.Forms.DataGridView dgvTranscations;
         private MetroFramework.Controls.MetroTextBox txtRefNumber;
         private MetroFramework.Controls.MetroLabel metroLabel4;
-        private MetroFramework.Controls.MetroButton btnUpdate;
         private MetroFramework.Controls.MetroButton btnDelete;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroComboBox cmbPayTyp;

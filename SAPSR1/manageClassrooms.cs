@@ -15,8 +15,7 @@ namespace SAPSR1
         public int teacherId;
         public string classDetails;
         /****************************************/
-        public Boolean dacFoud;
-        public Boolean dacCrud;
+        public Boolean dacFound;
         /*************************************/
 
 
@@ -103,14 +102,23 @@ namespace SAPSR1
                 query.Connection = connection;
                 query.CommandText = sql;
                 MySqlDataReader dataReader = query.ExecuteReader();
-                while (dataReader.Read())
+                if (dataReader.HasRows)
                 {
-                    this.classRoomId = Convert.ToInt32(dataReader["classRoomId"]);
-                    this.classGrade = Convert.ToInt32(dataReader["classGrade"]);
-                    this.teacherId = Convert.ToInt32(dataReader["teacherId"]);
-                    this.classDetails = dataReader["classDetails"].ToString();
-                    this.className = dataReader["className"].ToString();
+                    this.dacFound = true;
+                    while (dataReader.Read())
+                    {
+                        this.classRoomId = Convert.ToInt32(dataReader["classRoomId"]);
+                        this.classGrade = Convert.ToInt32(dataReader["classGrade"]);
+                        this.teacherId = Convert.ToInt32(dataReader["teacherId"]);
+                        this.classDetails = dataReader["classDetails"].ToString();
+                        this.className = dataReader["className"].ToString();
+                    }
                 }
+                else
+                {
+                    this.dacFound = false;
+                }
+               
             }
             catch (Exception ex)
             {

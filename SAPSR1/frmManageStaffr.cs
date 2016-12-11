@@ -26,5 +26,10 @@ namespace SAPSR1
         {
 
         }
+
+        private void BtnStaff_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

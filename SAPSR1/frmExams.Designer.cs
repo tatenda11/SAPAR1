@@ -75,7 +75,7 @@
             this.metroTabControl1.Controls.Add(this.metroTabPage2);
             this.metroTabControl1.Location = new System.Drawing.Point(23, 72);
             this.metroTabControl1.Name = "metroTabControl1";
-            this.metroTabControl1.SelectedIndex = 0;
+            this.metroTabControl1.SelectedIndex = 1;
             this.metroTabControl1.Size = new System.Drawing.Size(894, 425);
             this.metroTabControl1.TabIndex = 0;
             this.metroTabControl1.UseSelectable = true;
@@ -200,6 +200,7 @@
             this.txtExamDes.UseSelectable = true;
             this.txtExamDes.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtExamDes.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtExamDes.Leave += new System.EventHandler(this.txtExamDes_Leave);
             // 
             // metroLabel4
             // 
@@ -239,6 +240,8 @@
             this.txtExamTitle.UseSelectable = true;
             this.txtExamTitle.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtExamTitle.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtExamTitle.Click += new System.EventHandler(this.txtExamTitle_Click);
+            this.txtExamTitle.Leave += new System.EventHandler(this.txtExamTitle_Leave);
             // 
             // metroLabel3
             // 
@@ -268,6 +271,7 @@
             this.cmbGrade.Size = new System.Drawing.Size(51, 29);
             this.cmbGrade.TabIndex = 4;
             this.cmbGrade.UseSelectable = true;
+            this.cmbGrade.Leave += new System.EventHandler(this.cmbGrade_Leave);
             // 
             // metroLabel2
             // 
@@ -407,6 +411,7 @@
             this.txtPaperDes.Name = "txtPaperDes";
             this.txtPaperDes.Size = new System.Drawing.Size(303, 102);
             this.txtPaperDes.TabIndex = 5;
+            this.txtPaperDes.Leave += new System.EventHandler(this.txtPaperDes_Leave);
             // 
             // metroLabel7
             // 
@@ -423,6 +428,7 @@
             this.txtPossibleMark.Name = "txtPossibleMark";
             this.txtPossibleMark.Size = new System.Drawing.Size(143, 20);
             this.txtPossibleMark.TabIndex = 3;
+            this.txtPossibleMark.Leave += new System.EventHandler(this.txtPossibleMark_Leave);
             // 
             // metroLabel6
             // 
@@ -439,6 +445,8 @@
             this.txtPaperTitle.Name = "txtPaperTitle";
             this.txtPaperTitle.Size = new System.Drawing.Size(143, 20);
             this.txtPaperTitle.TabIndex = 0;
+            this.txtPaperTitle.TextChanged += new System.EventHandler(this.txtPaperTitle_TextChanged);
+            this.txtPaperTitle.Leave += new System.EventHandler(this.txtPaperTitle_Leave);
             // 
             // btnClose
             // 

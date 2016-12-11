@@ -18,6 +18,7 @@ namespace SAPSR1
     {
         public int teacherId;
         public int classId;
+        public Boolean swapTeacher;
         public Boolean startIntract;
         MySqlCommand query = new MySqlCommand();
         MySqlDataAdapter da = new MySqlDataAdapter();
@@ -126,29 +127,35 @@ namespace SAPSR1
                         DialogResult dialogResult = MessageBox.Show("Are you sure you want to change the class teacher", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (dialogResult == DialogResult.Yes)
                         {
-                            bool set = myC.updateClass(this.classId);
-                            if (set == true)
+                            if(swapTeacher == false)
                             {
-                                MessageBox.Show("Updated Class Successfully", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.fillClass();
+                                DialogResult dialogResult2 = MessageBox.Show("this teacher was already assigned to a class if you update you the class will remail without a teacher", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                                if (dialogResult2 == DialogResult.Yes)
+                                {
+                                    bool set = myC.updateClass(this.classId);
+                                    if (set == true)
+                                    {
+                                        MessageBox.Show("Updated Class Successfully", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        this.fillClass();
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Failed to update class", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Failed to update class", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                        }
-                        else
-                        {
-                            myC.teacherId = this.teacherId;
-                            bool set = myC.updateClass(this.classId);
-                            if (set == true)
-                            {
-                                MessageBox.Show("Updated Class Successfully", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                this.fillClass();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Failed to update class", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                bool set = myC.updateClass(this.classId);
+                                if (set == true)
+                                {
+                                    MessageBox.Show("Updated Class Successfully", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    this.fillClass();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Failed to update class", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                }
                             }
                         }
                     }
@@ -202,7 +209,7 @@ namespace SAPSR1
                     if(myC.setClass(className,grade, Convert.ToInt32(teacher),des) == true)
                     {
                         MessageBox.Show("Added Class Successfully", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.fillClass();
+                        this.refresh();
                     }
                 }
             }
@@ -235,9 +242,11 @@ namespace SAPSR1
             {
                 if (this.startIntract == true && this.dgvClassInfo.SelectedRows.Count > 0)
                 {
+                    this.swapTeacher = false;
                     this.txtClassName.Enabled = false;
                     this.cmbClassGrade.Enabled = false;
                     this.btnAdd.Enabled = false;
+                    this.btnUpdate.Enabled = true;
                     var classId = dgvClassInfo.SelectedRows[0].Cells[0].Value.ToString();
                     manageClassrooms myC = new manageClassrooms();
                     myC.getClass(Convert.ToInt32(classId));
@@ -247,6 +256,7 @@ namespace SAPSR1
                     manageUserDetails myU = new manageUserDetails();
                     myU.getUserDetails(myC.teacherId);
                     cmbTeacher.Text = myU.lastName;
+                    cmbTeacher.SelectedValue = myC.teacherId;
                     this.classId = myC.classRoomId;
                     this.teacherId = myC.teacherId; 
                 }
@@ -270,6 +280,71 @@ namespace SAPSR1
         private void frmAddClass_Shown(object sender, EventArgs e)
         {
             this.startIntract = true;
+        }
+
+        private void txtClassName_Leave(object sender, EventArgs e)
+        {
+            var className = this.txtClassName.Text;
+            if(validator.isValidAlphaNumeric(className) == false)
+            {
+                MessageBox.Show(validator.errorMsg , "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtClassName.Focus();
+            }
+        }
+
+        private void txtClassName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cmbTeacher_Leave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void cmbTeacher_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if(startIntract == true)
+                {
+                    int teacherId = Convert.ToInt32(this.cmbTeacher.SelectedValue);
+                    manageClassrooms myC = new manageClassrooms();
+                    myC.getClassByTeacher(teacherId);
+                    if (myC.dacFound == true)
+                    {
+                        this.swapTeacher = true;
+                        MessageBox.Show(this.cmbTeacher.Text + "is already assigned to " + myC.className, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    }
+                    else
+                    {
+                        this.swapTeacher = false;
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed in cmbTeacher_Leave() " + ex.Message);
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.refresh();
+        }
+
+        private void refresh()
+        {
+            this.txtClassDes.Text = "";
+            this.txtClassName.Text = "";
+            this.txtClassName.Enabled = true;
+            this.cmbClassGrade.Enabled = true;
+            this.cmbTeacher.Text = "";
+            this.cmbClassGrade.Text = "";
+            this.btnAdd.Enabled = true;
+            this.btnUpdate.Enabled = false;
+            this.fillClass();
         }
     }
 }

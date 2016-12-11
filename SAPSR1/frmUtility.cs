@@ -33,7 +33,7 @@ namespace SAPSR1
         {
             /*frmManagestudentsMain frmM = new frmManagestudentsMain();
              frmM.ShowDialog();*/
-            frmTransactions myFrT = new frmTransactions();
+            frmAddUser myFrT = new frmAddUser();
             myFrT.ShowDialog();
         }
     }

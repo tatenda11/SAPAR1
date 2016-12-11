@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Drawing.Printing;
 
 namespace SAPSR1
 { 
@@ -20,6 +21,7 @@ namespace SAPSR1
         int refNumber;
         DataTable dt = new DataTable();
         Bitmap bmp;
+        Dictionary<string, string> dictInvoice = new Dictionary<string, string>();
 
         public frmTransactions()
         {
@@ -154,6 +156,11 @@ namespace SAPSR1
                     this.txtPaid.Text = myB.PaymentIn.ToString();
                     /*populate transactions*/
                     this.fillTrans(Convert.ToInt32(this.txtEnrolId.Text));
+                    /*gather invoice information*/
+                    manageUserDetails myU = new manageUserDetails();
+                    myU.getUserDetails(sessions.userId);
+                    //this.dictInvoice.Add("receiptTeller", myU.firstName + " " + myU.lastName);
+                    //this.dictInvoice.Add("studentName", myS.firstName + " " + myS.lastName);
                 }
                 else
                 {
@@ -221,7 +228,9 @@ namespace SAPSR1
                         this.txtOpenBal.Text = myFb.OpenBal.ToString();
                         this.txtPaid.Text = myFb.PaymentIn.ToString();
                         this.fillTrans(Convert.ToInt32(enId));
+                       // invoiceParams.Add(this.txtFname.Text + " "+this.txtLastName.Text);
                         MessageBox.Show("transaction processing complete", "system notfication", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.printInvoice();
                     }
                     else
                     {
@@ -234,6 +243,47 @@ namespace SAPSR1
             catch(Exception ex)
             {
                 MessageBox.Show("failed in btnProcess_Click() " + ex, "system error");
+            }
+        }
+
+        private void printInvoice()
+        {
+            try
+            {
+                PrintDialog myPrintDialog = new PrintDialog();
+                PrintDocument myPrintDocument = new PrintDocument();
+                myPrintDialog.Document = myPrintDocument;
+                myPrintDocument.PrintPage += MyPrintDocument_PrintPage;
+                DialogResult print = myPrintDialog.ShowDialog();
+                if (print == DialogResult.OK)
+                {
+                    myPrintDocument.Print();
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in printInvoice() " + ex, "system error");
+            }
+        }
+
+        private void MyPrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            try
+            {
+                Graphics graphic = e.Graphics;
+                Font font = new Font("Courier new",12);
+                float fontHeight = font.GetHeight();
+                int startX = 10;
+                int startY = 10;
+                int offset = 40;
+                graphic.DrawString("Fees Payment Invoice  SAPS primary", new Font("Courier new", 18),new SolidBrush(Color.Black),startX,startY);
+                string studentName = this.dictInvoice["studentName"].ToString().PadRight(40);
+               // string payDate = 
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("MyPrintDocument_PrintPage() " + ex, "system error");
             }
         }
 
@@ -250,7 +300,7 @@ namespace SAPSR1
                 this.txtOpenBal.Text = "";
                 this.txtPaid.Text = "";
                 this.txtTranDetails.Text = "";
-                this.btnUpdate.Enabled = false;
+               // this.btnUpdate.Enabled = false;
                 this.btnProcess.Enabled = false;
                 this.btnDelete.Enabled = false;
 
@@ -266,7 +316,7 @@ namespace SAPSR1
             try
             {
                 manageTransaction myT = new manageTransaction();
-                int tran = Convert.ToInt32(dgvTranscations.SelectedRows[0].Cells[0].Value);
+                string tran = Convert.ToString(dgvTranscations.SelectedRows[0].Cells[0].Value);
                 myT.getTransacation(tran.ToString());
                 this.txtAmount.Text = myT.transAccount.ToString();
                 this.txtTranDetails.Text = myT.transDetails;
@@ -275,7 +325,7 @@ namespace SAPSR1
                 this.txtTranDate.Value = Convert.ToDateTime(myT.transDate);
                 this.btnProcess.Enabled = false;
                 this.btnDelete.Enabled = true;
-                this.btnUpdate.Enabled = true;
+                //this.btnUpdate.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -283,6 +333,101 @@ namespace SAPSR1
             }
         }
 
-        
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            try
+            {   //checking that logged in user is no an admin
+                if(sessions.userType != "A")
+                {
+                    frmAuthenticate myA = new frmAuthenticate();
+                    DialogResult access = myA.ShowDialog();
+                    if (access == DialogResult.OK)
+                    {
+                        manageUsers myU = new manageUsers();
+                        if(myU.adminAuth(myA.userName,myA.password) == true)
+                        {
+                            bzlTransactions myTrans = new bzlTransactions();
+                            myTrans.tranId = this.txtRefNumber.Text;
+                            myTrans.accountId = this.txtEnrolId.Text;
+                            myTrans.DeleteTransacation();
+                            if (myTrans.dacCrud == true)
+                            {
+                                this.txtTranDetails.Text = "";
+                                this.txtAmount.Text = "";
+                                manageControl myC = new manageControl();
+                                managefeesBalance myFb = new managefeesBalance();
+                                myFb.getBalance(this.txtEnrolId.Text, sessions.currTerm);
+                                this.refNumber = myC.useTranHeader(this.refNumber);
+                                this.txtRefNumber.Text = "ref" + this.refNumber.ToString();
+                                this.txtCurBalance.Text = myFb.CurrentBal.ToString();
+                                this.txtOpenBal.Text = myFb.OpenBal.ToString();
+                                this.txtPaid.Text = myFb.PaymentIn.ToString();
+                                this.fillTrans(Convert.ToInt32(this.txtEnrolId.Text));
+                                MessageBox.Show("transaction deleted success", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Failed to delete transaction", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid Adimin Credentials", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        } 
+                        
+                    }
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this transaction", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (dialogResult == DialogResult.OK)
+                    {
+                        bzlTransactions myTrans = new bzlTransactions();
+                        myTrans.tranId = this.txtRefNumber.Text;
+                        myTrans.DeleteTransacation();
+                        myTrans.accountId = this.txtEnrolId.Text;
+                        if (myTrans.dacCrud == true)
+                        {
+                            MessageBox.Show("transaction deleted success", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Failed to delete transaction", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                    }
+                }
+               
+            }
+            catch(Exception ex){
+                System.Windows.Forms.MessageBox.Show("Failed to fillTrans()  " + ex);
+            }
+        }
+
+        private void metroButton1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSystemSearch myS = new frmSystemSearch();
+                myS.searchType = "students";
+                DialogResult access = myS.ShowDialog();
+                if (access == DialogResult.OK)
+                {
+                    if(myS.searchedId != "")
+                    {
+                        this.txtEnrolId.Focus();
+                        this.txtEnrolId.Text = myS.searchedId;
+                        this.txtTranDetails.Focus();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No student was selected please double click disired student", "System notification", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed to open search form " + ex);
+            }
+        }
     }
 }

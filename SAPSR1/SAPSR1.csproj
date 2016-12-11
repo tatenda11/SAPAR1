@@ -65,11 +65,48 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="bzlTransactions.cs" />
+    <Compile Include="EmailAddressAttribute.cs" />
+    <Compile Include="frmAuthenticate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAuthenticate.Designer.cs">
+      <DependentUpon>frmAuthenticate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClassExams.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClassExams.Designer.cs">
+      <DependentUpon>frmClassExams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmContactDeveloper.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmContactDeveloper.designer.cs">
+      <DependentUpon>frmContactDeveloper.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExaminationRecords.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExaminationRecords.designer.cs">
+      <DependentUpon>frmExaminationRecords.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmExams.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmExams.Designer.cs">
       <DependentUpon>frmExams.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmHelpTopics.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmHelpTopics.designer.cs">
+      <DependentUpon>frmHelpTopics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMainMenuUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMainMenuUpdate.designer.cs">
+      <DependentUpon>frmMainMenuUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="frmManagerUsersMain.cs">
       <SubType>Form</SubType>
@@ -89,6 +126,12 @@
     <Compile Include="frmManageStudents.designer.cs">
       <DependentUpon>frmManageStudents.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmStaffDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,11 +144,29 @@
     <Compile Include="frmStudentDetail.designer.cs">
       <DependentUpon>frmStudentDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSystemSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSystemSearch.Designer.cs">
+      <DependentUpon>frmSystemSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTeacherMainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTeacherMainMenu.designer.cs">
+      <DependentUpon>frmTeacherMainMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTranscations.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmTranscations.designer.cs">
       <DependentUpon>frmTranscations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmUpdateUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUpdateUser.Designer.cs">
+      <DependentUpon>frmUpdateUser.cs</DependentUpon>
     </Compile>
     <Compile Include="frmUtility.cs">
       <SubType>Form</SubType>
@@ -113,9 +174,11 @@
     <Compile Include="frmUtility.Designer.cs">
       <DependentUpon>frmUtility.cs</DependentUpon>
     </Compile>
+    <Compile Include="manageEmployees.cs" />
     <Compile Include="manageExamPaper.cs" />
     <Compile Include="manageExams.cs" />
     <Compile Include="managefeesBalance.cs" />
+    <Compile Include="manageMarks.cs" />
     <Compile Include="Properties\appHelper.cs" />
     <Compile Include="databaseUtilies.cs" />
     <Compile Include="frmAddClass.cs">
@@ -165,11 +228,29 @@
     <EmbeddedResource Include="frmAttendance.resx">
       <DependentUpon>frmAttendance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmAuthenticate.resx">
+      <DependentUpon>frmAuthenticate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClassExams.resx">
+      <DependentUpon>frmClassExams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmContactDeveloper.resx">
+      <DependentUpon>frmContactDeveloper.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExaminationRecords.resx">
+      <DependentUpon>frmExaminationRecords.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmExams.resx">
       <DependentUpon>frmExams.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmHelpTopics.resx">
+      <DependentUpon>frmHelpTopics.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMainMenuUpdate.resx">
+      <DependentUpon>frmMainMenuUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmManagerUsersMain.resx">
       <DependentUpon>frmManagerUsersMain.cs</DependentUpon>
@@ -180,14 +261,26 @@
     <EmbeddedResource Include="frmManageStudents.resx">
       <DependentUpon>frmManageStudents.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmStaffDetails.resx">
       <DependentUpon>frmStaffDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStudentDetail.resx">
       <DependentUpon>frmStudentDetail.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmSystemSearch.resx">
+      <DependentUpon>frmSystemSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTeacherMainMenu.resx">
+      <DependentUpon>frmTeacherMainMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTranscations.resx">
       <DependentUpon>frmTranscations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUpdateUser.resx">
+      <DependentUpon>frmUpdateUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmUtility.resx">
       <DependentUpon>frmUtility.cs</DependentUpon>

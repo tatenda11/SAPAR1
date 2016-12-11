@@ -33,7 +33,7 @@ namespace SAPSR1
             }
             catch (MySqlException e)
             {
-                System.Windows.Forms.MessageBox.Show("Failed in manageUsers checkConnection()  " + e);
+                System.Windows.Forms.MessageBox.Show("Failed in manageUsers checkConnection()  " + e.Message);
             }
         }
 
@@ -50,7 +50,7 @@ namespace SAPSR1
             }
             catch (MySqlException ex)
             {
-                System.Windows.Forms.MessageBox.Show("Failed execute query  " + ex);
+                System.Windows.Forms.MessageBox.Show("Failed execute query  " + ex.Message);
                 return false;
             }
             finally

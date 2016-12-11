@@ -97,5 +97,19 @@ namespace SAPSR1
 
         } 
 
+        public Boolean DeleteTrans(string tranId)
+        {
+            try
+            {
+                string sql = "DELETE FROM wiztransacations WHERE transId = '" + tranId + "'";
+                return executeQuery(sql);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("system error " + ex);
+                return false;
+            }
+        }
+
     }
 }

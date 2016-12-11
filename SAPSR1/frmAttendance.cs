@@ -19,6 +19,7 @@ namespace SAPSR1
         int classId;
         int page = 0;
         int classTotal;
+
         MySqlConnection connection = new MySqlConnection(databaseUtilies.GetConnectionStrings());
         public frmAttendance()
         {
@@ -36,8 +37,11 @@ namespace SAPSR1
                     myC.getClassByTeacher(sessions.userId);
                     this.classId = myC.classRoomId;
                     this.classTotal = 3;
+                    var attendDate = this.txtDate.Value.ToShortDateString();
                     this.lbCounter.Text = page.ToString() + "/" + classTotal.ToString();
-                    //this.fillStudents("SELECT * FROM wizstudents WHERE classId =" + this.classId);
+                    this.lblShowList.Text = "List of students not marked in register";
+                    string sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                    this.fillStudents(sql);
 
                 } 
             }
@@ -188,6 +192,9 @@ namespace SAPSR1
                             this.txtAbsent.Text = myA.absentdays.ToString();
                             this.txtPresent.Text = myA.presentdays.ToString();
                             this.txtTotal.Text = myA.totaldays.ToString();
+                            this.lblShowList.Text = "List of students not marked in register";
+                            string sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                            this.fillStudents(sql);
                         }
                         else
                         {
@@ -221,6 +228,10 @@ namespace SAPSR1
                                 this.txtPresent.Text = myA.presentdays.ToString();
                                 this.txtTotal.Text = myA.totaldays.ToString();
                                 MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " updated marked present", "system info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                this.lblShowList.Text = "List of students not marked in register";
+                                string sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                                this.fillStudents(sql);
+
                             }
                             else
                             {
@@ -257,6 +268,9 @@ namespace SAPSR1
                             this.txtAbsent.Text = myA.absentdays.ToString();
                             this.txtPresent.Text = myA.presentdays.ToString();
                             this.txtTotal.Text = myA.totaldays.ToString();
+                            this.lblShowList.Text = "List of students not marked in register";
+                            string sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                            this.fillStudents(sql);
                         }
                         else
                         {
@@ -289,9 +303,11 @@ namespace SAPSR1
                             {
                                 this.txtAbsent.Text = myA.absentdays.ToString();
                                 this.txtPresent.Text = myA.presentdays.ToString();
-
                                 this.txtTotal.Text = myA.totaldays.ToString();
                                 MessageBox.Show(this.txtFname.Text + " " + this.txtLname.Text + " updated marked absent", "system info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                                this.lblShowList.Text = "List of students not marked in register";
+                                string sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                                this.fillStudents(sql);
                             }
                             else
                             {
@@ -313,21 +329,26 @@ namespace SAPSR1
             try
             {
                 var condition = this.cmbCondition.Text;
+                this.dt.Clear();
                 var attendDate = this.txtDate.Value.ToShortDateString();
                 string sql;
                 switch (condition)
                 {
-                    case "present":
-                        sql = "SELECT * FROM wizstudents WHERE classId = '"+ this.classId + "' AND enrolmentId IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '"+ attendDate +"'AND status = P ) ";
+                    case  "Present":
+                        sql = "SELECT * FROM wizstudents WHERE classId = '"+ this.classId + "' AND enrolmentId IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '"+ attendDate +"'AND status = 'P' ) ";
+                        this.lblShowList.Text = "List of students marked Present";
                         break;
-                    case "absent":
-                        sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "'AND status = A ) ";
+                    case "Absent":
+                        sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "'AND status = 'A' ) ";
+                        this.lblShowList.Text = "List of students marked Absent";
                         break;
+                    case "Unmarked":
+                        sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                        break;               
                     default:
-                        sql = "SELECT * FROM wizstudents WHERE classId =" + this.classId;
-                    break;
+                        sql = "SELECT * FROM wizstudents WHERE classId = '" + this.classId + "' AND enrolmentId NOT IN (SELECT enrolmentId FROM wizattendsheet WHERE entryData = '" + attendDate + "' ) ";
+                        break;
                 }
-                //MessageBox.Show(condition);
                 this.fillStudents(sql);
             }
             catch(Exception ex)

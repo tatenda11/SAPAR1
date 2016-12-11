@@ -93,8 +93,26 @@ namespace SAPSR1
             }
             catch(Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show("failed in manageExam get Eaxm() " + ex);
+                System.Windows.Forms.MessageBox.Show("failed in manageExam get Eaxm() " + ex.Message);
                 return false;
+            }
+        }
+
+        public Boolean checkEndTermExamSet(string subject, string grade, string term)
+        {
+            try
+            {
+                string sql = "SELECT examId FROM wizexams WHERE subjectId = '" + subject + "' AND classGrade = '" + grade + "' AND termId = '" + term + "' ";
+                if(rowCount(sql) > 0)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("failed in manageExam get Eaxm() " + ex.Message);
+                return true;
             }
         }
     }

@@ -12,6 +12,7 @@ namespace SAPSR1
 {
     public partial class frmAddUser : MetroFramework.Forms.MetroForm
     {
+        public string empId;
         public frmAddUser()
         {
             InitializeComponent();
@@ -23,14 +24,14 @@ namespace SAPSR1
             switch (utyp)
             {
                 case "Teacher":
-                    str = "T";  
-                break;
+                    str = "T";
+                    break;
                 case "Clerk":
                     str = "C";
-                break;
+                    break;
                 default:
                     str = "A";
-                break;
+                    break;
             }
             return str;
 
@@ -53,22 +54,22 @@ namespace SAPSR1
                 var cell = this.txtMobile.Text;
                 var msg = this.txtMsg.Text;
                 /*validate input*/
-                if(usrname.Length < 4)
+                if (usrname.Length < 4)
                 {
                     MessageBox.Show("username should be at least 5 characters", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.txtUserName.Focus();
                 }
-                else if(password == "")
+                else if (password == "")
                 {
                     MessageBox.Show("password required", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.txtPassword.Focus();
                 }
-                else if(usrtyp == "")
+                else if (usrtyp == "")
                 {
                     MessageBox.Show("select a user type", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.txtUserType.Focus();
                 }
-                else if(validator.IsValidEmail(email) == false)
+                else if (validator.isValidEmail(email) == false)
                 {
                     MessageBox.Show("invalid email address", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     this.txtEmail.Focus();
@@ -77,13 +78,13 @@ namespace SAPSR1
                 else
                 {
                     manageUsers myU = new manageUsers();
-                    if(myU.checkExist(usrname)== false)
+                    if (myU.checkExist(usrname) == false)
                     {
-                        if(myU.setUser(usrname,password, getUserEnum(usrtyp), email) == true)
+                        if (myU.setUser(usrname, password, getUserEnum(usrtyp), email,"") == true)
                         {
                             /*enter other info*/
                             manageUserDetails myD = new manageUserDetails();
-                            if(myD.setDetails(myU.userId,fname,sname,cell) == true)
+                            if (myD.setDetails(myU.userId, fname, sname, cell) == true)
                             {
                                 /* notification email*/
                                 MessageBox.Show("Added User Successfully", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -111,6 +112,98 @@ namespace SAPSR1
         private void metroButton1_Click(object sender, EventArgs e)
         {
             this.txtPassword.Text = appHelper.GetUniqueKey(7);
+        }
+
+
+        private void txtFname_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtLastName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLastName_MouseLeave(object sender, EventArgs e)
+        {
+        }
+
+        private void txtMobile_Leave(object sender, EventArgs e)
+        {
+            var number = this.txtMobile.Text;
+            if (validator.isValidPhoneNumber(number) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtFname.Focus();
+            }
+        }
+
+        private void Details_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLastName_Leave(object sender, EventArgs e)
+        {
+
+            var LastName = this.txtLastName.Text;
+            if (validator.isValidateName(LastName) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtFname.Focus();
+            }
+        }
+
+        private void txtFname_Leave(object sender, EventArgs e)
+        {
+            var firstName = this.txtFname.Text;
+            if (validator.isValidateName(firstName) == false)
+            {
+                MessageBox.Show(validator.errorMsg, "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtFname.Focus();
+            }
+
+        }
+
+        private void txtFname_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmSystemSearch mySearch = new frmSystemSearch();
+                mySearch.searchType = "employees";
+                DialogResult myD = mySearch.ShowDialog();
+                if(myD == DialogResult.OK)
+                {
+                    this.txtempId.Text = mySearch.searchedId;
+                    this.txtempId.Enabled = false;
+                    manageEmployees myE = new manageEmployees();
+                    myE.getEmpDetails(mySearch.searchedId);
+                    if(myE.dacFound == true)
+                    {
+                        this.txtEmail.Text = myE.Email;
+                        this.txtFname.Text = myE.Fname;
+                        this.txtLastName.Text = myE.Sname;
+                        this.txtUserName.Text = myE.Sname + myE.Fname;
+                        this.txtMobile.Text = myE.Mobile;
+                        this.txtMsg.Text = "SchWiz account created";
+                    }
+                    else
+                    {
+                        MessageBox.Show("you cannot add non-employees as users", "System Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in  btnSearch_Click() "+ ex.Message);
+            }
         }
     }
 }

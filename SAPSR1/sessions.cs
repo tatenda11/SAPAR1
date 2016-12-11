@@ -13,5 +13,7 @@ namespace SAPSR1
         public static string curPeriod;
         public static string currTerm;
         public static Double  fees;
+        public static int classId;
+        public static int classGrade;
     }
 }

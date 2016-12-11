@@ -51,6 +51,7 @@
             this.btnNext = new MetroFramework.Controls.MetroButton();
             this.btnPrev = new MetroFramework.Controls.MetroButton();
             this.lbCounter = new MetroFramework.Controls.MetroLabel();
+            this.lblShowList = new MetroFramework.Controls.MetroLabel();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.SuspendLayout();
@@ -360,6 +361,7 @@
             // 
             // dgvStudents
             // 
+            this.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvStudents.Location = new System.Drawing.Point(32, 249);
             this.dgvStudents.Name = "dgvStudents";
@@ -374,7 +376,7 @@
             this.cmbCondition.Items.AddRange(new object[] {
             "Present",
             "Absent",
-            "All"});
+            "Unmarked"});
             this.cmbCondition.Location = new System.Drawing.Point(32, 212);
             this.cmbCondition.Name = "cmbCondition";
             this.cmbCondition.Size = new System.Drawing.Size(174, 21);
@@ -421,11 +423,23 @@
             this.lbCounter.Text = "10 / 30";
             this.lbCounter.Click += new System.EventHandler(this.lbCounter_Click);
             // 
+            // lblShowList
+            // 
+            this.lblShowList.AutoSize = true;
+            this.lblShowList.FontSize = MetroFramework.MetroLabelSize.Tall;
+            this.lblShowList.FontWeight = MetroFramework.MetroLabelWeight.Regular;
+            this.lblShowList.Location = new System.Drawing.Point(379, 208);
+            this.lblShowList.Name = "lblShowList";
+            this.lblShowList.Size = new System.Drawing.Size(95, 25);
+            this.lblShowList.TabIndex = 19;
+            this.lblShowList.Text = "Last Name";
+            // 
             // frmAttendance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(938, 456);
+            this.Controls.Add(this.lblShowList);
             this.Controls.Add(this.lbCounter);
             this.Controls.Add(this.btnPrev);
             this.Controls.Add(this.btnNext);
@@ -471,5 +485,6 @@
         private MetroFramework.Controls.MetroButton btnNext;
         private MetroFramework.Controls.MetroButton btnPrev;
         private MetroFramework.Controls.MetroLabel lbCounter;
+        private MetroFramework.Controls.MetroLabel lblShowList;
     }
 }
