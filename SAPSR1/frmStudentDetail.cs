@@ -104,7 +104,8 @@ namespace SAPSR1
         {
            //this.ta.Focus();
            this.fillClass();
-                this.Student.SelectedIndex = 0;
+           this.Student.SelectedIndex = 0;
+                this.txtFirstName.Focus();
            if (this.update == true)
             {
                 this.btnSave.Enabled = false;
@@ -373,6 +374,71 @@ namespace SAPSR1
             catch(Exception ex)
             {
                 MessageBox.Show("application error " + ex);
+            }
+        }
+
+        private void txtFirstName_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtFirstName_Leave(object sender, EventArgs e)
+        {
+            string txt = this.txtFirstName.Text;
+            if(validator.isValidateName(txt) == false && txt != "")
+            {
+                MessageBox.Show(validator.errorMsg, "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtFirstName.Focus();
+            }
+        }
+
+        private void txtMidName_Leave(object sender, EventArgs e)
+        {
+            string txt = this.txtMidName.Text;
+            if (validator.isValidateName(txt) == false && txt != "")
+            {
+                MessageBox.Show(validator.errorMsg, "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtMidName.Focus();
+            }
+        }
+
+        private void tXTSurname_Leave(object sender, EventArgs e)
+        {
+            string txt = this.tXTSurname.Text;
+            if (validator.isValidateName(txt) == false && txt != "")
+            {
+                MessageBox.Show(validator.errorMsg, "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.tXTSurname.Focus();
+            }
+        }
+
+        private void txtDob_Leave(object sender, EventArgs e)
+        {
+            string txt = this.txtDob.Value.ToShortDateString();
+            if (validator.isValidDateOfBirth(txt,18,3) == false && txt != "")
+            {
+                MessageBox.Show(validator.errorMsg, "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtDob.Focus();
+            }
+        }
+
+        private void txtGuardianFname_Leave(object sender, EventArgs e)
+        {
+            string txt = this.txtGuardianFname.Text;
+            if (validator.isValidateName(txt) == false && txt != "")
+            {
+                MessageBox.Show(validator.errorMsg, "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtGuardianFname.Focus();
+            }
+        }
+
+        private void txtGuardianSurname_Leave(object sender, EventArgs e)
+        {
+            string txt = this.txtGuardianSurname.Text;
+            if (validator.isValidateName(txt) == false && txt != "")
+            {
+                MessageBox.Show(validator.errorMsg, "system info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.txtGuardianSurname.Focus();
             }
         }
     }

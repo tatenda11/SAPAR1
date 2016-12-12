@@ -30,15 +30,15 @@
         {
             this.txtFname = new MetroFramework.Controls.MetroTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.btnUpdate = new MetroFramework.Controls.MetroButton();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.cmbUserTyp = new MetroFramework.Controls.MetroComboBox();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.txtLastName = new MetroFramework.Controls.MetroTextBox();
-            this.cmbUserTyp = new MetroFramework.Controls.MetroComboBox();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.btnUpdate = new MetroFramework.Controls.MetroButton();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.btnSuspend = new MetroFramework.Controls.MetroButton();
+            this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.btnClose = new MetroFramework.Controls.MetroButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -91,14 +91,39 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "user Information";
             // 
-            // metroLabel1
+            // btnUpdate
             // 
-            this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(6, 43);
-            this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(73, 19);
-            this.metroLabel1.TabIndex = 1;
-            this.metroLabel1.Text = "First Name";
+            this.btnUpdate.Location = new System.Drawing.Point(85, 195);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(198, 38);
+            this.btnUpdate.TabIndex = 6;
+            this.btnUpdate.Text = "update account";
+            this.btnUpdate.UseSelectable = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(6, 135);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(66, 19);
+            this.metroLabel3.TabIndex = 5;
+            this.metroLabel3.Text = "User Type";
+            // 
+            // cmbUserTyp
+            // 
+            this.cmbUserTyp.FormattingEnabled = true;
+            this.cmbUserTyp.ItemHeight = 23;
+            this.cmbUserTyp.Items.AddRange(new object[] {
+            "Teacher",
+            "Clerk",
+            "Admin",
+            "Blocked"});
+            this.cmbUserTyp.Location = new System.Drawing.Point(85, 125);
+            this.cmbUserTyp.Name = "cmbUserTyp";
+            this.cmbUserTyp.Size = new System.Drawing.Size(198, 29);
+            this.cmbUserTyp.TabIndex = 4;
+            this.cmbUserTyp.UseSelectable = true;
             // 
             // metroLabel2
             // 
@@ -141,38 +166,14 @@
             this.txtLastName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtLastName.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // cmbUserTyp
+            // metroLabel1
             // 
-            this.cmbUserTyp.FormattingEnabled = true;
-            this.cmbUserTyp.ItemHeight = 23;
-            this.cmbUserTyp.Items.AddRange(new object[] {
-            "Teacher",
-            "Clerk",
-            "Admin"});
-            this.cmbUserTyp.Location = new System.Drawing.Point(85, 125);
-            this.cmbUserTyp.Name = "cmbUserTyp";
-            this.cmbUserTyp.Size = new System.Drawing.Size(198, 29);
-            this.cmbUserTyp.TabIndex = 4;
-            this.cmbUserTyp.UseSelectable = true;
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(6, 135);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(66, 19);
-            this.metroLabel3.TabIndex = 5;
-            this.metroLabel3.Text = "User Type";
-            // 
-            // btnUpdate
-            // 
-            this.btnUpdate.Location = new System.Drawing.Point(85, 195);
-            this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(198, 38);
-            this.btnUpdate.TabIndex = 6;
-            this.btnUpdate.Text = "update account";
-            this.btnUpdate.UseSelectable = true;
-            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            this.metroLabel1.AutoSize = true;
+            this.metroLabel1.Location = new System.Drawing.Point(6, 43);
+            this.metroLabel1.Name = "metroLabel1";
+            this.metroLabel1.Size = new System.Drawing.Size(73, 19);
+            this.metroLabel1.TabIndex = 1;
+            this.metroLabel1.Text = "First Name";
             // 
             // groupBox2
             // 
@@ -185,16 +186,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "advanced options";
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(6, 33);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(233, 38);
-            this.btnDelete.TabIndex = 7;
-            this.btnDelete.Text = "delete pemanently";
-            this.btnDelete.UseSelectable = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
             // btnSuspend
             // 
             this.btnSuspend.Location = new System.Drawing.Point(6, 81);
@@ -205,6 +196,16 @@
             this.btnSuspend.UseSelectable = true;
             this.btnSuspend.Click += new System.EventHandler(this.btnSuspend_Click);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(6, 33);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(233, 38);
+            this.btnDelete.TabIndex = 7;
+            this.btnDelete.Text = "delete pemanently";
+            this.btnDelete.UseSelectable = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // btnClose
             // 
             this.btnClose.Location = new System.Drawing.Point(382, 258);
@@ -213,6 +214,7 @@
             this.btnClose.TabIndex = 8;
             this.btnClose.Text = "close";
             this.btnClose.UseSelectable = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // frmUpdateUser
             // 

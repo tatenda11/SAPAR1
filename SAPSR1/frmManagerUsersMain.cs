@@ -17,6 +17,7 @@ namespace SAPSR1
         MySqlCommand query = new MySqlCommand();
         MySqlConnection connection = new MySqlConnection(databaseUtilies.GetConnectionStrings());
         public int userId;
+        Bitmap bmp;
 
         public frmManageUsers()
         {
@@ -104,14 +105,93 @@ namespace SAPSR1
         {
             try
             {
-                this.userId = Convert.ToInt32(dgvUsers.SelectedRows[0].Cells[3].Value.ToString());
+                this.userId = Convert.ToInt32(dgvUsers.SelectedRows[0].Cells[0].Value.ToString());
                 this.btnUpdate.Enabled = true;
-                this.btnDelete.Enabled = true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("failed in dgvUsers_DoubleClick() " + ex.Message);
             }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmUpdateUser frmU = new frmUpdateUser();
+                frmU.userId = this.userId;
+                frmU.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in dgvUsers_DoubleClick() " + ex.Message);
+            }
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var txt = this.txtSearch.Text;
+                string sql = "SELECT userId,firstName,lastName,phoneNumber FROM wizuserdetails WHERE firstName LIKE '%" + txt + "%' UNION (SELECT userId,firstName,lastName,phoneNumber FROM wizuserdetails WHERE lastName LIKE '%" + txt + "%')";
+                this.fillUsers(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed in dgvUsers_DoubleClick() " + ex.Message);
+            }
+
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var txt = this.txtSearch.Text;
+                string sql = "SELECT userId,firstName,lastName,phoneNumber FROM wizuserdetails WHERE firstName LIKE '%" + txt + "%' UNION (SELECT userId,firstName,lastName,phoneNumber FROM wizuserdetails WHERE lastName LIKE '%" + txt + "%')";
+                this.fillUsers(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed in dgvUsers_DoubleClick() " + ex.Message);
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
+        }
+
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int height = this.dgvUsers.Height;
+                int width = this.dgvUsers.Width;
+                dgvUsers.Height = dgvUsers.RowCount * dgvUsers.RowTemplate.Height * 2;
+                bmp = new Bitmap(width, dgvUsers.Height);
+                dgvUsers.DrawToBitmap(bmp, new Rectangle(0, 0, width, dgvUsers.Height));
+                dgvUsers.Height = height;
+                //this.printPreviewUsers.ShowDialog();
+
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in btnPrint_Click() " + ex.Message);
+            }
+        }
+
+        private void printDocumentUsers_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            try
+            {
+                e.Graphics.DrawImage(bmp, 0, 0);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("application error btnPrint_Click() " + ex);
+            }
+
         }
     }
 }

@@ -101,5 +101,55 @@ namespace SAPSR1
                 connection.Close();
             }
         }
+
+        public static void BackupDataBase()
+        {
+            try
+            {
+                string file = "C:\\backup.sql";
+                using (MySqlConnection conn = new MySqlConnection(GetConnectionStrings()))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ExportToFile(file);
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed to backup database "+ ex.Message);
+            }      
+        }
+
+        public static void recoverDb()
+        {
+            try
+            {
+                string file = "C:\\backup.sql";
+                using (MySqlConnection conn = new MySqlConnection(GetConnectionStrings()))
+                {
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        using (MySqlBackup mb = new MySqlBackup(cmd))
+                        {
+                            cmd.Connection = conn;
+                            conn.Open();
+                            mb.ImportFromFile(file);
+                            conn.Close();
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed to backup database " + ex.Message);
+            }
+        }
     }
 }

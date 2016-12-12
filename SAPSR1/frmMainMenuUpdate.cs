@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SAPSR1.Properties;
 
 namespace SAPSR1
 {
@@ -155,18 +156,50 @@ namespace SAPSR1
 
         private void btnStaffReport_Click(object sender, EventArgs e)
         {
-
+            frmViewEmpoyeesRpt viewR = new frmViewEmpoyeesRpt();
+            viewR.ShowDialog();
         }
 
         private void btnHelp_Click(object sender, EventArgs e)
         {
-            frmHelp myFrt = new frmHelp();
-            myFrt.ShowDialog();
+            string fileIndex = Settings.Default["backupIndex"].ToString();
+            databaseUtilies.recoverDb();
+            MessageBox.Show("database restored succesifully", "System notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void BtnEmployeeDetails_Click(object sender, EventArgs e)
         {
           
+        }
+
+        private void metroTile10_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileIndex = Settings.Default["backupIndex"].ToString();
+                databaseUtilies.BackupDataBase();
+                int indexToSave = Convert.ToInt32(fileIndex) + 1;
+                Settings.Default["backupIndex"] = indexToSave;
+                Settings.Default.Save();
+                MessageBox.Show("database backed up succesifully","System notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed dataase backup " + ex.Message);
+            }
+        }
+
+        private void FrmFinancial_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmViewFeesStatement myStat = new frmViewFeesStatement();
+                myStat.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("failed in fees statement report " + ex);
+            }
         }
     }
 }

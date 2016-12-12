@@ -211,6 +211,47 @@ namespace SAPSR1
             }
         }
 
+        public Boolean deleteUser(int user)
+        {
+            try
+            {
+                string sql = "DELETE FROM wizuser WHERE userId = '" + this.userId + "' LIMIT 1";
+                return executeQuery(sql);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in manageUsers deleteUser()  " + ex);
+                return false;
+            }
+        }
+
+        public void getByEmpId(string emId)
+        {
+            try
+            {
+                checkConnection();
+                string sql = "SELECT * FROM wizuser WHERE empId = '" + emId + "'";
+                query.Connection = connection;
+                query.CommandText = sql;
+                MySqlDataReader dataReader = query.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    this.userId = Convert.ToInt32(dataReader["userId"]);
+                    this.userName = dataReader["userName"].ToString();
+                    this.password = dataReader["password"].ToString();
+                    this.email = dataReader["email"].ToString();
+                    this.userType = dataReader["userType"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in manageUsers getUser()  " + e);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
     }
 }
 

@@ -28,22 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageUsers));
             this.btnReports = new MetroFramework.Controls.MetroButton();
             this.btnPrint = new MetroFramework.Controls.MetroButton();
             this.btnClose = new MetroFramework.Controls.MetroButton();
-            this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.BtnUser = new MetroFramework.Controls.MetroButton();
             this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.dgvUsers = new System.Windows.Forms.DataGridView();
+            this.printDialogUsers = new System.Windows.Forms.PrintDialog();
+            this.printDocumentUsers = new System.Drawing.Printing.PrintDocument();
+            this.printPreviewUsers = new System.Windows.Forms.PrintPreviewDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(506, 431);
+            this.btnReports.Location = new System.Drawing.Point(394, 431);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(109, 36);
             this.btnReports.TabIndex = 29;
@@ -53,13 +56,14 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(397, 431);
+            this.btnPrint.Location = new System.Drawing.Point(276, 431);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(103, 36);
             this.btnPrint.TabIndex = 28;
             this.btnPrint.Text = "Print";
             this.btnPrint.UseSelectable = true;
             this.btnPrint.UseWaitCursor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // btnClose
             // 
@@ -70,16 +74,7 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseSelectable = true;
             this.btnClose.UseWaitCursor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(267, 431);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(124, 36);
-            this.btnDelete.TabIndex = 21;
-            this.btnDelete.Text = "Delete";
-            this.btnDelete.UseSelectable = true;
-            this.btnDelete.UseWaitCursor = true;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // BtnUser
             // 
@@ -99,6 +94,7 @@
             this.btnUpdate.TabIndex = 24;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseSelectable = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtSearch
             // 
@@ -129,6 +125,7 @@
             this.txtSearch.UseSelectable = true;
             this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnSearch
             // 
@@ -138,6 +135,7 @@
             this.btnSearch.TabIndex = 20;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseSelectable = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // metroLabel1
             // 
@@ -157,6 +155,26 @@
             this.dgvUsers.TabIndex = 30;
             this.dgvUsers.DoubleClick += new System.EventHandler(this.dgvUsers_DoubleClick);
             // 
+            // printDialogUsers
+            // 
+            this.printDialogUsers.Document = this.printDocumentUsers;
+            this.printDialogUsers.UseEXDialog = true;
+            // 
+            // printDocumentUsers
+            // 
+            this.printDocumentUsers.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocumentUsers_PrintPage);
+            // 
+            // printPreviewUsers
+            // 
+            this.printPreviewUsers.AutoScrollMargin = new System.Drawing.Size(0, 0);
+            this.printPreviewUsers.AutoScrollMinSize = new System.Drawing.Size(0, 0);
+            this.printPreviewUsers.ClientSize = new System.Drawing.Size(400, 300);
+            this.printPreviewUsers.Document = this.printDocumentUsers;
+            this.printPreviewUsers.Enabled = true;
+            this.printPreviewUsers.Icon = ((System.Drawing.Icon)(resources.GetObject("printPreviewUsers.Icon")));
+            this.printPreviewUsers.Name = "printPreviewUsers";
+            this.printPreviewUsers.Visible = false;
+            // 
             // frmManageUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -167,7 +185,6 @@
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.BtnUser);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtSearch);
@@ -187,12 +204,14 @@
         private MetroFramework.Controls.MetroButton btnReports;
         private MetroFramework.Controls.MetroButton btnPrint;
         private MetroFramework.Controls.MetroButton btnClose;
-        private MetroFramework.Controls.MetroButton btnDelete;
         private MetroFramework.Controls.MetroButton BtnUser;
         private MetroFramework.Controls.MetroButton btnUpdate;
         private MetroFramework.Controls.MetroTextBox txtSearch;
         private MetroFramework.Controls.MetroButton btnSearch;
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private System.Windows.Forms.DataGridView dgvUsers;
+        private System.Windows.Forms.PrintDialog printDialogUsers;
+        private System.Drawing.Printing.PrintDocument printDocumentUsers;
+        private System.Windows.Forms.PrintPreviewDialog printPreviewUsers;
     }
 }

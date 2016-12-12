@@ -31,20 +31,19 @@
             this.btnReports = new MetroFramework.Controls.MetroButton();
             this.btnPrint = new MetroFramework.Controls.MetroButton();
             this.btnClose = new MetroFramework.Controls.MetroButton();
-            this.btnEdit = new MetroFramework.Controls.MetroButton();
             this.btnDelete = new MetroFramework.Controls.MetroButton();
             this.BtnStaff = new MetroFramework.Controls.MetroButton();
             this.btnUpdate = new MetroFramework.Controls.MetroButton();
             this.txtSearch = new MetroFramework.Controls.MetroTextBox();
             this.btnSearch = new MetroFramework.Controls.MetroButton();
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgvStaff = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).BeginInit();
             this.SuspendLayout();
             // 
             // btnReports
             // 
-            this.btnReports.Location = new System.Drawing.Point(625, 408);
+            this.btnReports.Location = new System.Drawing.Point(519, 408);
             this.btnReports.Name = "btnReports";
             this.btnReports.Size = new System.Drawing.Size(109, 36);
             this.btnReports.TabIndex = 29;
@@ -54,7 +53,7 @@
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(504, 408);
+            this.btnPrint.Location = new System.Drawing.Point(398, 408);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(115, 36);
             this.btnPrint.TabIndex = 28;
@@ -72,25 +71,16 @@
             this.btnClose.UseSelectable = true;
             this.btnClose.UseWaitCursor = true;
             // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(267, 408);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(113, 36);
-            this.btnEdit.TabIndex = 26;
-            this.btnEdit.Text = "Edit";
-            this.btnEdit.UseSelectable = true;
-            this.btnEdit.UseWaitCursor = true;
-            // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(386, 408);
+            this.btnDelete.Location = new System.Drawing.Point(280, 408);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(112, 36);
             this.btnDelete.TabIndex = 21;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseSelectable = true;
             this.btnDelete.UseWaitCursor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // BtnStaff
             // 
@@ -110,6 +100,7 @@
             this.btnUpdate.TabIndex = 24;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseSelectable = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtSearch
             // 
@@ -125,8 +116,7 @@
             this.txtSearch.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtSearch.CustomButton.UseSelectable = true;
             this.txtSearch.CustomButton.Visible = false;
-            this.txtSearch.Lines = new string[] {
-        "Quick Search"};
+            this.txtSearch.Lines = new string[0];
             this.txtSearch.Location = new System.Drawing.Point(23, 94);
             this.txtSearch.MaxLength = 32767;
             this.txtSearch.Name = "txtSearch";
@@ -138,10 +128,10 @@
             this.txtSearch.ShortcutsEnabled = true;
             this.txtSearch.Size = new System.Drawing.Size(710, 36);
             this.txtSearch.TabIndex = 22;
-            this.txtSearch.Text = "Quick Search";
             this.txtSearch.UseSelectable = true;
             this.txtSearch.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.txtSearch.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
             // 
             // btnSearch
             // 
@@ -160,24 +150,25 @@
             this.metroLabel1.Size = new System.Drawing.Size(0, 0);
             this.metroLabel1.TabIndex = 19;
             // 
-            // dataGridView1
+            // dgvStaff
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(23, 136);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(840, 266);
-            this.dataGridView1.TabIndex = 30;
+            this.dgvStaff.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvStaff.Location = new System.Drawing.Point(23, 136);
+            this.dgvStaff.Name = "dgvStaff";
+            this.dgvStaff.Size = new System.Drawing.Size(840, 266);
+            this.dgvStaff.TabIndex = 30;
+            this.dgvStaff.DoubleClick += new System.EventHandler(this.dgvStaff_DoubleClick);
             // 
             // frmManageStaff
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(887, 497);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvStaff);
             this.Controls.Add(this.btnReports);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.BtnStaff);
             this.Controls.Add(this.btnUpdate);
@@ -187,7 +178,7 @@
             this.Name = "frmManageStaff";
             this.Text = "Manage Staff ";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvStaff)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,13 +189,12 @@
         private MetroFramework.Controls.MetroButton btnReports;
         private MetroFramework.Controls.MetroButton btnPrint;
         private MetroFramework.Controls.MetroButton btnClose;
-        private MetroFramework.Controls.MetroButton btnEdit;
         private MetroFramework.Controls.MetroButton btnDelete;
         private MetroFramework.Controls.MetroButton BtnStaff;
         private MetroFramework.Controls.MetroButton btnUpdate;
         private MetroFramework.Controls.MetroTextBox txtSearch;
         private MetroFramework.Controls.MetroButton btnSearch;
         private MetroFramework.Controls.MetroLabel metroLabel1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvStaff;
     }
 }

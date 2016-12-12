@@ -33,6 +33,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
       <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
       <Private>True</Private>
@@ -49,10 +54,15 @@
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySqlBackup">
+      <HintPath>..\..\..\..\..\Desktop\Net45\MySqlBackup.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -174,6 +184,18 @@
     <Compile Include="frmUtility.Designer.cs">
       <DependentUpon>frmUtility.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmViewEmpoyeesRpt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewEmpoyeesRpt.Designer.cs">
+      <DependentUpon>frmViewEmpoyeesRpt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewFeesStatement.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewFeesStatement.Designer.cs">
+      <DependentUpon>frmViewFeesStatement.cs</DependentUpon>
+    </Compile>
     <Compile Include="manageEmployees.cs" />
     <Compile Include="manageExamPaper.cs" />
     <Compile Include="manageExams.cs" />
@@ -216,6 +238,18 @@
     <Compile Include="manageUsers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="rptEmpR1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptEmpR1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="rptFeesStatement.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptFeesStatement.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="sessions.cs" />
     <Compile Include="validator.cs" />
     <Compile Include="manageattendsheet.cs" />
@@ -285,6 +319,12 @@
     <EmbeddedResource Include="frmUtility.resx">
       <DependentUpon>frmUtility.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmViewEmpoyeesRpt.resx">
+      <DependentUpon>frmViewEmpoyeesRpt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewFeesStatement.resx">
+      <DependentUpon>frmViewFeesStatement.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -294,6 +334,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="rptEmpR1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptEmpR1.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptFeesStatement.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptFeesStatement.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
     <None Include="packages.config" />
@@ -309,6 +357,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

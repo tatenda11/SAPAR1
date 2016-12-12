@@ -32,7 +32,7 @@ namespace SAPSR1
                     break;
 
                 case "Admin":
-                    str = "C";
+                    str = "A";
                     break;
 
                 default:
@@ -51,9 +51,10 @@ namespace SAPSR1
                 if (sessions.userType == "A")
                 {
                     manageUsers myU = new manageUsers();
-                    myU.getUser(this.userId);
                     manageUserDetails myD = new manageUserDetails();
                     myD.getUserDetails(this.userId);
+                    myU.getUser(this.userId);
+                    MessageBox.Show(myU.userType);
                     this.txtFname.Text = myD.firstName;
                     this.txtLastName.Text = myD.lastName;
                     if (myU.userType == "A")
@@ -68,10 +69,11 @@ namespace SAPSR1
                     {
                         this.cmbUserTyp.Text = "Clerk";
                     }
-                    else
+                    else if(myU.userType == "B")
                     {
-                        this.cmbUserTyp.Text = "Blocked Account";
+                        this.cmbUserTyp.Text = "Blocked";
                     }
+
                 }
                 else
                 {
@@ -137,7 +139,32 @@ namespace SAPSR1
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            try
+            {
+                manageUsers myU = new manageUsers();
+                myU.getUser(this.userId);
+                DialogResult dialogResult = MessageBox.Show("All information associated with this account will be lost are you sure you want to proceed", "Confirm Option", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK || dialogResult == DialogResult.Yes)
+                {
+                    if (myU.deleteUser(this.userId) == true)
+                    {
+                        MessageBox.Show("account deleted success ", "System Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("failed to delete ", "System Information", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("failed in btnDelete_Click() " + ex.Message);
+            }
+        }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

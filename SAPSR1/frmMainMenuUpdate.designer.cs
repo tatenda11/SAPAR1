@@ -89,7 +89,7 @@
             this.btnTransactions.Name = "btnTransactions";
             this.btnTransactions.Size = new System.Drawing.Size(200, 140);
             this.btnTransactions.TabIndex = 2;
-            this.btnTransactions.Text = "Transactions";
+            this.btnTransactions.Text = "Fee Payment";
             this.btnTransactions.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.btnTransactions.UseCustomBackColor = true;
             this.btnTransactions.UseSelectable = true;
@@ -119,7 +119,7 @@
             this.btnMakePayment.Name = "btnMakePayment";
             this.btnMakePayment.Size = new System.Drawing.Size(200, 140);
             this.btnMakePayment.TabIndex = 3;
-            this.btnMakePayment.Text = "Fees";
+            this.btnMakePayment.Text = "Fees Payment Report";
             this.btnMakePayment.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.btnMakePayment.UseCustomBackColor = true;
             this.btnMakePayment.UseSelectable = true;
@@ -162,7 +162,7 @@
             this.btnStaffReport.Size = new System.Drawing.Size(200, 140);
             this.btnStaffReport.Style = MetroFramework.MetroColorStyle.Teal;
             this.btnStaffReport.TabIndex = 2;
-            this.btnStaffReport.Text = "Reports";
+            this.btnStaffReport.Text = "Staff Reports";
             this.btnStaffReport.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.btnStaffReport.UseSelectable = true;
             this.btnStaffReport.Click += new System.EventHandler(this.btnStaffReport_Click);
@@ -189,7 +189,7 @@
             this.metroTile6.Name = "metroTile6";
             this.metroTile6.Size = new System.Drawing.Size(200, 140);
             this.metroTile6.TabIndex = 6;
-            this.metroTile6.Text = "Exam Reports";
+            this.metroTile6.Text = "Mark Order";
             this.metroTile6.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.metroTile6.UseCustomBackColor = true;
             this.metroTile6.UseSelectable = true;
@@ -485,10 +485,11 @@
             this.FrmFinancial.Name = "FrmFinancial";
             this.FrmFinancial.Size = new System.Drawing.Size(200, 140);
             this.FrmFinancial.TabIndex = 7;
-            this.FrmFinancial.Text = "Financial Reports";
+            this.FrmFinancial.Text = "Fees Statement";
             this.FrmFinancial.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.FrmFinancial.UseCustomBackColor = true;
             this.FrmFinancial.UseSelectable = true;
+            this.FrmFinancial.Click += new System.EventHandler(this.FrmFinancial_Click);
             // 
             // groupBox3
             // 
@@ -549,7 +550,7 @@
             this.UserReports.Name = "UserReports";
             this.UserReports.Size = new System.Drawing.Size(200, 140);
             this.UserReports.TabIndex = 5;
-            this.UserReports.Text = "Manage Staff";
+            this.UserReports.Text = "User Report";
             this.UserReports.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.UserReports.UseCustomBackColor = true;
             this.UserReports.UseSelectable = true;
@@ -563,7 +564,7 @@
             this.btnHelp.Size = new System.Drawing.Size(200, 140);
             this.btnHelp.Style = MetroFramework.MetroColorStyle.Red;
             this.btnHelp.TabIndex = 6;
-            this.btnHelp.Text = "Help";
+            this.btnHelp.Text = "Database Restore";
             this.btnHelp.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.btnHelp.UseSelectable = true;
             this.btnHelp.Click += new System.EventHandler(this.btnHelp_Click);
@@ -589,9 +590,11 @@
             this.metroTile10.Name = "metroTile10";
             this.metroTile10.Size = new System.Drawing.Size(200, 140);
             this.metroTile10.TabIndex = 29;
+            this.metroTile10.Text = "BackUp End Restore";
             this.metroTile10.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.metroTile10.UseCustomBackColor = true;
             this.metroTile10.UseSelectable = true;
+            this.metroTile10.Click += new System.EventHandler(this.metroTile10_Click);
             // 
             // metroTile9
             // 
@@ -602,7 +605,7 @@
             this.metroTile9.Size = new System.Drawing.Size(200, 140);
             this.metroTile9.Style = MetroFramework.MetroColorStyle.Red;
             this.metroTile9.TabIndex = 28;
-            this.metroTile9.Text = "Email";
+            this.metroTile9.Text = "Run Term End";
             this.metroTile9.TileTextFontWeight = MetroFramework.MetroTileTextWeight.Bold;
             this.metroTile9.UseSelectable = true;
             // 
@@ -626,7 +629,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
-            this.ClientSize = new System.Drawing.Size(1289, 788);
+            this.ClientSize = new System.Drawing.Size(1289, 772);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);

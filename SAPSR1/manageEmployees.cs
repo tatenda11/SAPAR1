@@ -106,5 +106,19 @@ namespace SAPSR1
                 return false;
             }
         }
+
+        public Boolean deleteEmployee(string emId)
+        {
+            try
+            {
+                string sql = "DELETE FROM wizemployes WHERE employeeId = '" + emId +"' LIMIT 1";
+                return executeQuery(sql);
+            }
+            catch(Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show("Failed in getEmpDetails()" + ex);
+                return false;
+            }
+        }
     }
 }

@@ -13,7 +13,8 @@ namespace SAPSR1
     public partial class frmStaffDetails : MetroFramework.Forms.MetroForm
     {
         public int empId;
-
+        public string empIdStr;
+        public Boolean isEdit;
         public frmStaffDetails()
         {
             InitializeComponent();
@@ -28,6 +29,33 @@ namespace SAPSR1
                 this.empId = myC.empId;
                 this.txtStaffId.Text = "emp" + this.empId;
                 this.txtStaffId.Focus();
+                if(this.isEdit == true)
+                {
+                    manageEmployees myE = new manageEmployees();
+                    myE.getEmpDetails(this.empIdStr);
+                    this.btnAdd.Enabled = false;
+                    this.btnUpdate.Enabled = true;
+                    this.ckbStatus.Checked = false;
+                    this.txtAdress.Text = myE.address;
+                    this.txtDob.Value = Convert.ToDateTime(myE.DOB);
+                    this.txtempCell.Text = myE.Mobile;
+                    this.txtempDate.Value = Convert.ToDateTime(myE.EmpDate);
+                    this.txtEmpEmail.Text = myE.Email;
+                    this.txtGndr.Text = myE.gender;
+                    this.txtFname.Text = myE.Fname;
+                    this.txtnatId.Text = myE.nationalId;
+                    this.txtNextOfKeenCell.Text = myE.iceContact;
+                    this.txtNextOfKeenName.Text = myE.iceName;
+                    this.txtRel.Text = myE.iceRelationship;
+                    this.txtSname.Text = myE.Sname;
+                    if (myE.Status == "A")
+                    {
+                        this.ckbStatus.Checked = true;
+                    }
+                    this.cmbDpt.Text = myE.Dpt;
+                    this.txtSname.Text = myE.Sname;
+                    this.txtSupervisorId.Text = myE.supervisorId;
+                }
             }
             catch(Exception ex)
             {
